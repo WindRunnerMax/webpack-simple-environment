@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
 
 module.exports = {
     mode: process.env.NODE_ENV,
@@ -9,11 +10,28 @@ module.exports = {
         path:path.resolve(__dirname, "dist")
     },
     devServer: {
+        hot: true, // 开启热更新
         open: true, // 自动打开浏览器预览
         compress: true, // 开启gzip
         port: 3000  //不指定端口会自动分配
     },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                use: "vue-loader",
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    "vue-style-loader",
+                    "css-loader"
+                ],
+            },
+        ],
+    },
     plugins:[
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             title: "Webpack Template", 
             filename: "index.html", // 打包出来的文件名 根路径是`module.exports.output.path`
