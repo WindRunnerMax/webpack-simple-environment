@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const StaticPageSlice = require("./static-page-slice");
 
 module.exports = {
     mode: process.env.NODE_ENV,
@@ -28,9 +27,6 @@ module.exports = {
             },
             inject: "body", // `head`、`body`、`true`、`false`
             scriptLoading: "blocking" // `blocking`、`defer`
-        }),
-        new StaticPageSlice({
-            url: "https://www.example.com/"
         })
     ]
 }
