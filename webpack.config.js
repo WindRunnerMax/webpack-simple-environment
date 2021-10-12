@@ -9,6 +9,11 @@ module.exports = {
         filename: "index.js",
         path:path.resolve(__dirname, "dist")
     },
+    devServer: {
+        open: true, // 自动打开浏览器预览
+        compress: true, // 开启gzip
+        port: 3000  //不指定端口会自动分配
+    },
     plugins:[
         new HtmlWebpackPlugin({
             title: "Webpack Template", 
