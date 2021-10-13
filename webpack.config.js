@@ -28,6 +28,27 @@ module.exports = {
                     "css-loader"
                 ],
             },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            esModule: false,
+                            limit: 8192, //小于`8K`，用`url-loader`转成`base64` ，否则使用`file-loader`来处理文件
+                            fallback: {
+                                loader: "file-loader",
+                                options: {
+                                    esModule: false,
+                                    name: "[name].[hash:8].[ext]",
+                                    outputPath: "static", //打包之后文件存放的路径, dist/images
+                                }
+                            },
+        
+                        }
+                    }
+                ]
+            },
         ],
     },
     plugins:[
