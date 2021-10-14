@@ -25,9 +25,19 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     "vue-style-loader",
-                    "css-loader"
+                    "css-loader",
+                    "postcss-loader"
                 ],
             },
+            {
+                test: /\.(scss)$/,
+                use: [
+                    "vue-style-loader",
+                    "css-loader",
+                    "postcss-loader",
+                    "sass-loader",
+                ]
+                },
             {
                 test: /\.(png|jpg|gif)$/i,
                 use: [
@@ -53,7 +63,7 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: ["babel-loader"]
-		},
+		    },
         ],
     },
     plugins:[

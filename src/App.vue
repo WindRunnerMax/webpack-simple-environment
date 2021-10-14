@@ -21,7 +21,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "./common/styles.scss";
     .vue{
         width: 100px;
     }
@@ -29,6 +30,7 @@ export default {
         width: 300px;
     }
     .example{
+        color: $color-blue;
         font-size: 30px;
     }
 </style>
