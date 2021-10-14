@@ -3,6 +3,7 @@
         <img src="./static/vue.jpg" alt="" class="vue">
         <img src="./static/vue-large.png" alt="" class="vue-large">
         <div class="example">{{ msg }}</div>
+        <button @click="toast">按钮</button>
     </div>
 </template>
 
@@ -11,7 +12,12 @@ export default {
     name: "App",
     data: () => ({
         msg: "Example"
-    })
+    }),
+    methods: {
+        toast: function(){
+            window?.alert("ExampleMessage");
+        }
+    }
 }
 </script>
 
