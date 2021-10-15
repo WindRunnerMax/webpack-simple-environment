@@ -1,9 +1,11 @@
 import Vue from "vue";
 import App from "./App.vue";
-import Router from "./router/index";
+import Store from "./store";
+import Router from "./router";
 
 const app = new Vue({
     router: Router,
+    store: Store,
     ...App,
 });
 app.$mount("#app");
