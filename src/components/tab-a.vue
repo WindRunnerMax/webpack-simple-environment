@@ -4,6 +4,6 @@
 
 <script>
 export default {
-    name: "TabA"
-}
+    name: "TabA",
+};
 </script>
