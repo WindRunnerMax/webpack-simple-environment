@@ -18,25 +18,24 @@
     </div>
 </template>
 
-<script>
-import { mapState } from "vuex";
-export default {
-    name: "FrameWork",
-    data: () => ({
-        msg: "Example",
-    }),
-    computed: mapState({
-        text: state => state.text,
-    }),
-    methods: {
-        toast: function () {
-            window?.alert("ExampleMessage");
-        },
-        setVuexValue: function () {
-            this.$store.commit("setText", "New Value");
-        },
-    },
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { State } from "vuex-class";
+
+@Component
+export default class FrameWork extends Vue {
+    protected msg = "Example";
+
+    @State("text") text!: string;
+
+    protected toast() {
+        window?.alert("ExampleMessage");
+    }
+
+    protected setVuexValue() {
+        this.$store.commit("setText", "New Value");
+    }
+}
 </script>
 
 <style scoped lang="scss">

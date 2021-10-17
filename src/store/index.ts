@@ -3,18 +3,21 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const state = {
+export interface State {
+    text: string;
+}
+const state: State = {
     text: "Value",
 };
 
 const getters = {
-    getText(state) {
+    getText(state: State) {
         return state.text;
     },
 };
 
 const mutations = {
-    setText: (state, text) => {
+    setText: (state: State, text: string) => {
         state.text = text;
     },
 };
