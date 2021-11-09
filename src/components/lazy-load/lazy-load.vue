@@ -1,6 +1,10 @@
 <template>
     <div>
-        <component :is="renderComponent"></component>
+        <component
+            :is="renderComponent"
+            v-bind="componentParams"
+            v-on="componentEvents"
+        ></component>
     </div>
 </template>
 
@@ -12,6 +16,10 @@ export default class LazyLoad extends Vue {
     lazyComponent!: () => Vue;
     @Prop({ type: String, required: true })
     type!: "observer" | "idle" | "lazy";
+    @Prop({ type: Object, default: () => ({}) })
+    componentParams!: Record<string, unknown>;
+    @Prop({ type: Object, default: () => ({}) })
+    componentEvents!: Record<string, unknown>;
 
     protected observer: IntersectionObserver | null = null;
     protected renderComponent: (() => Vue) | null = null;
