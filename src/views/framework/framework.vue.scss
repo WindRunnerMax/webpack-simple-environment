@@ -1,0 +1,15 @@
+// scoped
+@import "../../common/styles.scss";
+.vue {
+    width: 100px;
+}
+.vue-large {
+    width: 300px;
+}
+.example {
+    color: $color-blue;
+    font-size: 30px;
+}
+section {
+    margin: 10px;
+}

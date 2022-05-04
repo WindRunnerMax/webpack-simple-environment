@@ -3,9 +3,9 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-import FrameWork from "../views/framework.vue";
-import TabA from "../components/tab-a.vue";
-import TabB from "../components/tab-b.vue";
+import FrameWork from "../views/framework/framework.vue";
+import TabA from "../components/tab-a/tab-a.vue";
+import TabB from "../components/tab-b/tab-b.vue";
 
 const routes = [
     {

@@ -25,7 +25,17 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                use: "vue-loader",
+                use: [
+                    "vue-loader",
+                    {
+                        loader: "./vue-multiple-files-loader",
+                        options: {
+                            // 匹配的文件拓展名
+                            style: ["scss", "css"],
+                            script: ["ts"],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/,
