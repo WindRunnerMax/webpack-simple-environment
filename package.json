@@ -1,0 +1,55 @@
+{
+  "name": "webpack-simple-environment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@arco-design/web-react": "^2.50.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^0.2.5",
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "7.11.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4",
+    "husky": "^7.0.4",
+    "less": "^3.0.0",
+    "less-loader": "5.0.0",
+    "lint-staged": "^12.0.2",
+    "postcss": "^8.3.3",
+    "sass": "^1.52.3",
+    "stylelint": "^14.8.5",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint-config-standard": "^25.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WindrunnerMax/webpack-simple-environment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WindrunnerMax/webpack-simple-environment/tree/rspack--chrome-extension"
+  },
+  "homepage": "https://github.com/WindrunnerMax/webpack-simple-environment/tree/rspack--chrome-extension#README",
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,less}": [
+      "stylelint --fix"
+    ]
+  }
+}
