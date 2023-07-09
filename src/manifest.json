@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension",
+  "icons": {
+    "16": "./static/favicon.png",
+    "32": "./static/favicon.png",
+    "48": "./static/favicon.png",
+    "128": "./static/favicon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "./static/favicon.png"
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting"]
+}
