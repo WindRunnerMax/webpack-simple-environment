@@ -12,8 +12,12 @@ const exec = command => {
 
 class FilesPlugin {
   apply(compiler) {
-    compiler.hooks.make.tap("JsonWatcher", compilation => {
-      compilation.fileDependencies.add(path.join(__dirname, "../src/manifest.json"));
+    compiler.hooks.make.tap("FilePlugin", compilation => {
+      const manifest = path.join(__dirname, "../src/manifest.json");
+      const resources = path.join(__dirname, "../public/static");
+      !compilation.fileDependencies.has(manifest) && compilation.fileDependencies.add(manifest);
+      !compilation.contextDependencies.has(resources) &&
+        compilation.contextDependencies.add(resources);
     });
 
     compiler.hooks.done.tapPromise("FilePlugin", () => {
