@@ -18,6 +18,7 @@
   "homepage": "https://github.com/WindrunnerMax/webpack-simple-environment/tree/rspack--chrome-extension#README",
   "dependencies": {
     "@arco-design/web-react": "^2.50.0",
+    "laser-utils": "^0.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

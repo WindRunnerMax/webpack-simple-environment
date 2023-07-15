@@ -15,6 +15,7 @@ specifiers:
   eslint-plugin-react: ^7.27.0
   eslint-plugin-react-hooks: ^4.3.0
   husky: ^7.0.4
+  laser-utils: ^0.0.2
   less: ^3.0.0
   less-loader: 6.0.0
   lint-staged: ^12.0.2
@@ -31,6 +32,7 @@ specifiers:
 
 dependencies:
   '@arco-design/web-react': registry.npmmirror.com/@arco-design/web-react/2.50.0_39c6e6c1bc384053f6bd1c822564c0e1
+  laser-utils: registry.npmmirror.com/laser-utils/0.0.2
   react: registry.npmmirror.com/react/17.0.2
   react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
 
@@ -3918,6 +3920,12 @@ packages:
     name: known-css-properties
     version: 0.26.0
     dev: true
+
+  registry.npmmirror.com/laser-utils/0.0.2:
+    resolution: {integrity: sha512-yRTyrZ3Jsl96jNI1pPKIENBL4wv6+WBlbt7OvJ4I6ocGW3BMWO6T0xWHPRXUvXdOe3o2ujKM6wUDcmDpeyWFRg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/laser-utils/-/laser-utils-0.0.2.tgz}
+    name: laser-utils
+    version: 0.0.2
+    dev: false
 
   registry.npmmirror.com/launch-editor/2.6.0:
     resolution: {integrity: sha512-JpDCcQnyAAzZZaZ7vEiSqL690w7dAEyLao+KC96zBplnYbJS7TYNjvM3M7y3dGz+v7aIsJk3hllWuc0kWAjyRQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/launch-editor/-/launch-editor-2.6.0.tgz}

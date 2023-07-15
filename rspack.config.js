@@ -25,6 +25,9 @@ module.exports = {
     },
   },
   builtins: {
+    define: {
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    },
     pluginImport: [
       {
         libraryName: "@arco-design/web-react",
