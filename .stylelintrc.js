@@ -14,5 +14,7 @@ module.exports = {
     "no-empty-source": null,
     "max-nesting-depth": 6,
     "selector-max-compound-selectors": 6,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]+$",
+    "selector-id-pattern": "^[a-z][a-zA-Z0-9_-]+$"
   },
 };

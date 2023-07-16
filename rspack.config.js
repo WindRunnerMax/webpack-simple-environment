@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     worker: "./src/worker/index.ts",
     popup: "./src/popup/index.tsx",
+    content: "./src/content/index.ts",
   },
   plugins: [
     new HtmlPlugin({
@@ -68,5 +69,6 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
+    publicPath: "/",
   },
 };

@@ -4,6 +4,7 @@ specifiers:
   '@arco-design/web-react': ^2.50.0
   '@rspack/cli': ^0.2.5
   '@rspack/plugin-html': ^0.2.5
+  '@types/chrome': ^0.0.241
   '@types/react': ^17.0.1
   '@types/react-dom': ^17.0.1
   '@typescript-eslint/eslint-plugin': ^5.4.0
@@ -39,6 +40,7 @@ dependencies:
 devDependencies:
   '@rspack/cli': registry.npmmirror.com/@rspack/cli/0.2.5
   '@rspack/plugin-html': registry.npmmirror.com/@rspack/plugin-html/0.2.5
+  '@types/chrome': registry.npmmirror.com/@types/chrome/0.0.241
   '@types/react': registry.npmmirror.com/@types/react/17.0.62
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/17.0.20
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.61.0_26cde6cc41039bd010e15f8cdbd5109b
@@ -675,6 +677,15 @@ packages:
       '@types/node': registry.npmmirror.com/@types/node/20.4.1
     dev: true
 
+  registry.npmmirror.com/@types/chrome/0.0.241:
+    resolution: {integrity: sha512-3WxC2D8zhyDnCU1GxyznoyUulLH6ReLWUWQm5LSM7S1rvV9w+k8TUNbWrFavk6zz2E1ws05lNawnSa7rK5kY8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/chrome/-/chrome-0.0.241.tgz}
+    name: '@types/chrome'
+    version: 0.0.241
+    dependencies:
+      '@types/filesystem': registry.npmmirror.com/@types/filesystem/0.0.32
+      '@types/har-format': registry.npmmirror.com/@types/har-format/1.2.11
+    dev: true
+
   registry.npmmirror.com/@types/connect-history-api-fallback/1.5.0:
     resolution: {integrity: sha512-4x5FkPpLipqwthjPsF7ZRbOv3uoLUFkTA9G9v583qi4pACvq0uTELrB8OLUzPWUI4IJIyvM85vzkV1nyiI2Lig==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/connect-history-api-fallback/-/connect-history-api-fallback-1.5.0.tgz}
     name: '@types/connect-history-api-fallback'
@@ -736,6 +747,26 @@ packages:
       '@types/express-serve-static-core': registry.npmmirror.com/@types/express-serve-static-core/4.17.35
       '@types/qs': registry.npmmirror.com/@types/qs/6.9.7
       '@types/serve-static': registry.npmmirror.com/@types/serve-static/1.15.2
+    dev: true
+
+  registry.npmmirror.com/@types/filesystem/0.0.32:
+    resolution: {integrity: sha512-Yuf4jR5YYMR2DVgwuCiP11s0xuVRyPKmz8vo6HBY3CGdeMj8af93CFZX+T82+VD1+UqHOxTq31lO7MI7lepBtQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/filesystem/-/filesystem-0.0.32.tgz}
+    name: '@types/filesystem'
+    version: 0.0.32
+    dependencies:
+      '@types/filewriter': registry.npmmirror.com/@types/filewriter/0.0.29
+    dev: true
+
+  registry.npmmirror.com/@types/filewriter/0.0.29:
+    resolution: {integrity: sha512-BsPXH/irW0ht0Ji6iw/jJaK8Lj3FJemon2gvEqHKpCdDCeemHa+rI3WBGq5z7cDMZgoLjY40oninGxqk+8NzNQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/filewriter/-/filewriter-0.0.29.tgz}
+    name: '@types/filewriter'
+    version: 0.0.29
+    dev: true
+
+  registry.npmmirror.com/@types/har-format/1.2.11:
+    resolution: {integrity: sha512-T232/TneofqK30AD1LRrrf8KnjLvzrjWDp7eWST5KoiSzrBfRsLrWDPk4STQPW4NZG6v2MltnduBVmakbZOBIQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/har-format/-/har-format-1.2.11.tgz}
+    name: '@types/har-format'
+    version: 1.2.11
     dev: true
 
   registry.npmmirror.com/@types/html-minifier-terser/7.0.0:

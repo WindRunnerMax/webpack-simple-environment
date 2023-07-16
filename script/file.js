@@ -21,9 +21,13 @@ class FilesPlugin {
     });
 
     compiler.hooks.done.tapPromise("FilePlugin", () => {
+      const manifest = path.join(__dirname, "../src/manifest.json");
+      const resources = path.join(__dirname, "../public/static/");
+      const manifestTarget = path.join(__dirname, "../dist/");
+      const resourcesTarget = path.join(__dirname, "../dist/static/");
       return Promise.all([
-        exec("cp ./src/manifest.json ./dist/"),
-        exec("cp -r ./public/static ./dist/static"),
+        exec(`cp ${manifest} ${manifestTarget}`),
+        exec(`cp -r ${resources} ${resourcesTarget}`),
       ]);
     });
   }
