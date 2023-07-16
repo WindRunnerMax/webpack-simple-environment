@@ -11,6 +11,7 @@ module.exports = {
     worker: "./src/worker/index.ts",
     popup: "./src/popup/index.tsx",
     content: "./src/content/index.ts",
+    inject: "./src/content/inject.ts",
   },
   plugins: [
     new HtmlPlugin({

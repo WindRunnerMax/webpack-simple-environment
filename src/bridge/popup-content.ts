@@ -1,25 +1,34 @@
 export const POPUP_CONTENT_ACTION = {
   COPY: "___COPY",
-  CONTEXT_MENU: "___CONTEXT_MENU",
-  KEY_DOWN: "___KEY_DOWN",
-  QUERY_SESSION: "___QUERY_SESSION",
+  MENU: "___MENU",
+  KEYDOWN: "___KEYDOWN",
+  QUERY_STATE: "___QUERY_STATE",
+} as const;
+
+export const QUERY_STATE_KEY = {
+  STORAGE_COPY: "___STORAGE_COPY",
+  STORAGE_MENU: "___STORAGE_MENU",
+  STORAGE_KEYDOWN: "___STORAGE_KEYDOWN",
+  SESSION_COPY: "___SESSION_COPY",
+  SESSION_MENU: "___SESSION_MENU",
+  SESSION_KEYDOWN: "___SESSION_KEYDOWN",
 } as const;
 
 export const POPUP_CONTENT_RTN = {
   STATE: "___STATE",
 } as const;
 
-type PopupContentAction =
+export type PopupContentAction =
   | {
       type:
-        | typeof POPUP_CONTENT_ACTION.CONTEXT_MENU
-        | typeof POPUP_CONTENT_ACTION.KEY_DOWN
+        | typeof POPUP_CONTENT_ACTION.MENU
+        | typeof POPUP_CONTENT_ACTION.KEYDOWN
         | typeof POPUP_CONTENT_ACTION.COPY;
-      payload: boolean;
+      payload: { checked: boolean; once: boolean };
     }
   | {
-      type: typeof POPUP_CONTENT_ACTION.QUERY_SESSION;
-      payload: string;
+      type: typeof POPUP_CONTENT_ACTION.QUERY_STATE;
+      payload: (typeof QUERY_STATE_KEY)[keyof typeof QUERY_STATE_KEY];
     };
 
 type PopupContentRTN = {
@@ -34,6 +43,8 @@ export class PopupContentBridge {
         const tabId = tabs[0] && tabs[0].id;
         if (tabId) {
           chrome.tabs.sendMessage(tabId, data).then(resolve);
+          // https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions
+          // chrome.scripting.executeScript;
         } else {
           resolve(null);
         }

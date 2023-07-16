@@ -1,3 +1,1 @@
-import { TEST } from "@/worker/test";
-
-console.log(TEST);
+console.log("Worker");
