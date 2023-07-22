@@ -64,7 +64,6 @@ export const App: FC = () => {
                 checked={copyState}
                 onChange={v => {
                   setCopyState(v);
-                  console.log("111", 111);
                   onSwitchChange(POPUP_CONTENT_ACTION.COPY, v);
                 }}
               />
