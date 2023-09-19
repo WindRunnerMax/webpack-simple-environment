@@ -22,16 +22,16 @@ const collector: (() => void)[] = [];
 
 // Equivalent to content_scripts document_end
 window.addEventListener("DOMContentLoaded", () => {
-  // // inject inject.js
-  // const script = document.createElement("script");
-  // script.src = chrome.runtime.getURL("inject.js");
-  // script.type = "text/javascript";
-  // script.onload = () => script.remove();
-  // (document.head || document.body).appendChild(script);
-
   DOMLoaded = true;
   collector.forEach(fn => fn());
 });
+
+// // inject inject.js
+// const script = document.createElement("script");
+// script.src = chrome.runtime.getURL("inject.js");
+// script.type = "text/javascript";
+// script.onload = () => script.remove();
+// (document.head || document.body).appendChild(script);
 
 const withDOMReady = (fn: () => void) => {
   if (DOMLoaded) {

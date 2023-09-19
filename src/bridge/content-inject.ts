@@ -33,3 +33,6 @@ export class PopupContentBridge {
     };
   }
 }
+
+// 1. window.addEventListener + window.postMessage
+// 2. document.addEventListener + document.dispatchEvent + CustomEvent
