@@ -31,12 +31,14 @@ export default class LazyLoad extends Vue {
     private init() {
         if (this.type === "observer") {
             // 存在`window.IntersectionObserver`
+            // https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API
             if (window.IntersectionObserver) {
                 this.observer = new IntersectionObserver(entries => {
                     entries.forEach(item => {
                         // `intersectionRatio`为目标元素的可见比例，大于`0`代表可见
                         // 在这里也有实现策略问题 例如加载后不解除`observe`而在不可见时销毁等
-                        if (item.intersectionRatio > 0) {
+                        // https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserverEntry
+                        if (item.intersectionRatio > 0 || item.isIntersecting) {
                             this.loadComponent();
                             // 加载完成后将其解除`observe`
                             this.observer?.unobserve(item.target);
