@@ -1,5 +1,5 @@
 {
-  "name": "mono-react",
+  "name": "fixed-height",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
@@ -23,8 +23,7 @@
     "@arco-design/web-react": "2.60.3",
     "ahooks": "3.7.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "mono-utils": "workspace: *"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@rspack/cli": "0.2.5",

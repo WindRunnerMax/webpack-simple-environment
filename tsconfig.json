@@ -20,9 +20,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "paths": {
-      "mono-utils": ["./packages/utils/src"],
-    },
+    "paths": {},
   },
   "include": [
     "packages/*/src"
