@@ -2,8 +2,6 @@
   "name": "react-rspack-template",
   "version": "1.0.0",
   "scripts": {
-    "dev:react": "pnpm --filter mono-react run dev",
-    "build:react": "pnpm --filter mono-react run build",
     "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
     "lint-style": "stylelint \"**/*.{css,scss,sass}\" --fix --ignore-path .gitignore"
   },
