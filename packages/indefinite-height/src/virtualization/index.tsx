@@ -85,6 +85,27 @@ export const VirtualizationMode: FC<{
       }
       const rect = entry.boundingClientRect;
       record[node.props.index] = rect.height;
+      if (isIntersecting) {
+        // 进入视口
+        if (node.props.isFirstNode) {
+          setSafeStart(index => index - THRESHOLD);
+        }
+        if (node.props.isLastNode) {
+          setSafeEnd(end => end + THRESHOLD);
+        }
+        node.changeStatus("viewport", rect.height);
+      } else {
+        // 脱离视口
+        if (node.props.isFirstNode) {
+          setSafeStart(index => index + 1);
+        }
+        if (node.props.isLastNode) {
+          setSafeEnd(end => end - 1);
+        }
+        if (node.state.mode !== "loading") {
+          node.changeStatus("placeholder", rect.height);
+        }
+      }
       const prev = node.prevNode();
       const next = node.nextNode();
       const isActualFirstNode = prev?.state.mode !== "viewport" && next?.state.mode === "viewport";
@@ -94,27 +115,6 @@ export const VirtualizationMode: FC<{
       }
       if (isActualLastNode) {
         setSafeEnd(node.props.index + THRESHOLD);
-      }
-      if (isIntersecting) {
-        // 进入视口
-        if (node.props.isFirstNode) {
-          setSafeStart(index => index - 1);
-        }
-        if (node.props.isLastNode) {
-          setSafeEnd(end => end + 1);
-        }
-        node.changeStatus("viewport", rect.height);
-      } else {
-        // 脱离视口
-        if (node.props.isFirstNode) {
-          setSafeStart(index => Math.min(props.list.length, index + 1));
-        }
-        if (node.props.isLastNode) {
-          setSafeEnd(end => end - 1);
-        }
-        if (node.state.mode !== "loading") {
-          node.changeStatus("placeholder", rect.height);
-        }
       }
     });
   });
