@@ -72,13 +72,13 @@ const App: React.FC<{ list: typeof LIST }> = props => {
     Promise.resolve().then(onScroll.run);
   };
 
-  const getStartPlaceHolderHeight = () => {
+  const startPlaceHolderHeight = useMemo(() => {
     return heightTable.slice(0, start).reduce((a, b) => a + b, 0);
-  };
+  }, [heightTable, start]);
 
-  const getEndPlaceHolderHeight = () => {
+  const endPlaceHolderHeight = useMemo(() => {
     return heightTable.slice(end, heightTable.length).reduce((a, b) => a + b, 0);
-  };
+  }, [end, heightTable]);
 
   return (
     <div
@@ -86,7 +86,7 @@ const App: React.FC<{ list: typeof LIST }> = props => {
       onScroll={onScroll.run}
       ref={onUpdateInformation}
     >
-      <div data-index={`0-${start}`} style={{ height: getStartPlaceHolderHeight() }}></div>
+      <div data-index={`0-${start}`} style={{ height: startPlaceHolderHeight }}></div>
       {scroll && (
         <React.Fragment>
           {list.slice(start, end).map(item => (
@@ -100,7 +100,7 @@ const App: React.FC<{ list: typeof LIST }> = props => {
           ))}
         </React.Fragment>
       )}
-      <div data-index={`${end}-${list.length}`} style={{ height: getEndPlaceHolderHeight() }}></div>
+      <div data-index={`${end}-${list.length}`} style={{ height: endPlaceHolderHeight }}></div>
     </div>
   );
 };
