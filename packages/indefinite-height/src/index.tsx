@@ -2,6 +2,7 @@ import { Grid } from "@arco-design/web-react";
 import ReactDOM from "react-dom";
 
 import { PlaceholderMode } from "./placeholder";
+import { VirtualizationMode } from "./virtualization";
 const Row = Grid.Row;
 const Col = Grid.Col;
 
@@ -25,7 +26,8 @@ const App = () => {
         <PlaceholderMode list={LIST} />
       </Col>
       <Col span={12}>
-        <div>col - 12</div>
+        <div>IntersectionObserver虚拟化方案</div>
+        <VirtualizationMode list={LIST} />
       </Col>
     </Row>
   );

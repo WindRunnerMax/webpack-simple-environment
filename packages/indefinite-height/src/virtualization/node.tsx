@@ -1,10 +1,13 @@
 import React from "react";
 
-import { ELEMENT_TO_NODE } from "./bridge";
+import { DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
 
 type NodeProps = {
   id: number;
+  index: number;
   content: JSX.Element;
+  isFirstNode?: boolean;
+  isLastNode?: boolean;
   observer: IntersectionObserver;
 };
 
@@ -16,18 +19,20 @@ type NodeState = {
 export class Node extends React.PureComponent<NodeProps, NodeState> {
   private ref: React.RefObject<HTMLDivElement>;
   private observer: IntersectionObserver;
+  private isActualMounted: boolean = false;
 
   constructor(props: NodeProps) {
     super(props);
     this.state = {
       mode: "loading",
-      height: 60, // 高度未知 未实际渲染时占位
+      height: DEFAULT_HEIGHT, // 高度未知 未实际渲染时占位
     };
     this.ref = React.createRef();
     this.observer = props.observer;
   }
 
   componentDidMount(): void {
+    this.isActualMounted = true;
     const el = this.ref.current;
     if (!el) return void 0;
     ELEMENT_TO_NODE.set(el, this);
@@ -35,6 +40,7 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
   }
 
   componentWillUnmount(): void {
+    this.isActualMounted = false;
     const el = this.ref.current;
     if (!el) return void 0;
     ELEMENT_TO_NODE.delete(el);
@@ -42,7 +48,7 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
   }
 
   public changeStatus = (mode: NodeState["mode"], height: number): void => {
-    this.setState({ mode, height: height || this.state.height });
+    this.isActualMounted && this.setState({ mode, height: height || this.state.height });
   };
 
   render() {
