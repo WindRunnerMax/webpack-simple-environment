@@ -63,7 +63,7 @@ importers:
         specifier: 5.3.2
         version: 5.3.2
 
-  packages/fixed-height:
+  packages/fixed-height-scroll:
     dependencies:
       '@arco-design/web-react':
         specifier: 2.60.3
@@ -109,7 +109,7 @@ importers:
         specifier: 13.3.3
         version: 13.3.3(sass@1.52.3)(webpack@5.76.0)
 
-  packages/indefinite-height:
+  packages/indefinite-height-placeholder:
     dependencies:
       '@arco-design/web-react':
         specifier: 2.60.3
@@ -133,9 +133,92 @@ importers:
       '@types/node':
         specifier: 20.11.10
         version: 20.11.10
-      '@types/pdfkit':
-        specifier: 0.13.3
-        version: 0.13.3
+      '@types/react':
+        specifier: 17.0.2
+        version: 17.0.2
+      '@types/react-dom':
+        specifier: 17.0.2
+        version: 17.0.2
+      copy-webpack-plugin:
+        specifier: '5'
+        version: 5.1.2(webpack@5.76.0)
+      less:
+        specifier: 4.2.0
+        version: 4.2.0
+      less-loader:
+        specifier: 12.1.0
+        version: 12.1.0(less@4.2.0)(webpack@5.76.0)
+      sass-loader:
+        specifier: 13.3.3
+        version: 13.3.3(sass@1.52.3)(webpack@5.76.0)
+
+  packages/indefinite-height-scroll:
+    dependencies:
+      '@arco-design/web-react':
+        specifier: 2.60.3
+        version: 2.60.3(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
+      ahooks:
+        specifier: 3.7.8
+        version: 3.7.8(react@17.0.2)
+      react:
+        specifier: 17.0.2
+        version: 17.0.2
+      react-dom:
+        specifier: 17.0.2
+        version: 17.0.2(react@17.0.2)
+    devDependencies:
+      '@rspack/cli':
+        specifier: 0.2.5
+        version: 0.2.5(react-refresh@0.14.0)(webpack@5.76.0)
+      '@rspack/plugin-html':
+        specifier: 0.2.5
+        version: 0.2.5(@rspack/core@0.2.5)
+      '@types/node':
+        specifier: 20.11.10
+        version: 20.11.10
+      '@types/react':
+        specifier: 17.0.2
+        version: 17.0.2
+      '@types/react-dom':
+        specifier: 17.0.2
+        version: 17.0.2
+      copy-webpack-plugin:
+        specifier: '5'
+        version: 5.1.2(webpack@5.76.0)
+      less:
+        specifier: 4.2.0
+        version: 4.2.0
+      less-loader:
+        specifier: 12.1.0
+        version: 12.1.0(less@4.2.0)(webpack@5.76.0)
+      sass-loader:
+        specifier: 13.3.3
+        version: 13.3.3(sass@1.52.3)(webpack@5.76.0)
+
+  packages/indefinite-height-virtualization:
+    dependencies:
+      '@arco-design/web-react':
+        specifier: 2.60.3
+        version: 2.60.3(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
+      ahooks:
+        specifier: 3.7.8
+        version: 3.7.8(react@17.0.2)
+      react:
+        specifier: 17.0.2
+        version: 17.0.2
+      react-dom:
+        specifier: 17.0.2
+        version: 17.0.2(react@17.0.2)
+    devDependencies:
+      '@rspack/cli':
+        specifier: 0.2.5
+        version: 0.2.5(react-refresh@0.14.0)(webpack@5.76.0)
+      '@rspack/plugin-html':
+        specifier: 0.2.5
+        version: 0.2.5(@rspack/core@0.2.5)
+      '@types/node':
+        specifier: 20.11.10
+        version: 20.11.10
       '@types/react':
         specifier: 17.0.2
         version: 17.0.2
@@ -408,7 +491,6 @@ packages:
     resolution: {integrity: sha512-6thA5rs4euQUXSlCkq+0TnVnWA2Or1oFGbmIpRGf2VDZjDYZ8VtqMIgAg08ZE9qJT8tSCuGBliAE9ccxUQ009A==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -417,7 +499,6 @@ packages:
     resolution: {integrity: sha512-sXTg+tvt0x5hEULvxi3alXAazbXh2KHubzT8hEjT9px5mPpHdhwnBTETt7+q4bbigwePT+ZDgS4Gkp2Rnqc4wg==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -426,7 +507,6 @@ packages:
     resolution: {integrity: sha512-wB5ST0PubSto2dVGbzS+/MItJAtmj+a5L0OoavMBsxKCfhAdKC4L7TB27LSCpZx8ltm66nNzBnv+FOep6DFV4w==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -435,7 +515,6 @@ packages:
     resolution: {integrity: sha512-Ia8V9f1PDKroXq12NstdjPazMa2TZjJNowz2T6KkGcvwVtBlzFHjg/fbwkmGHHsAtJTKmV/L7KdOyYC59P8wyw==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true

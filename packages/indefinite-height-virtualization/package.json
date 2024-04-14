@@ -1,5 +1,5 @@
 {
-  "name": "indefinite-height",
+  "name": "indefinite-height-virtualization",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
