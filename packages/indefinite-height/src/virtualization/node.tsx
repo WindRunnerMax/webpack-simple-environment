@@ -5,6 +5,7 @@ import { DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
 type NodeProps = {
   id: number;
   index: number;
+  instances: Node[];
   content: JSX.Element;
   isFirstNode?: boolean;
   isLastNode?: boolean;
@@ -29,6 +30,7 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
     };
     this.ref = React.createRef();
     this.observer = props.observer;
+    this.props.instances[this.props.index] = this;
   }
 
   componentDidMount(): void {
@@ -40,15 +42,23 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
   }
 
   componentWillUnmount(): void {
+    delete this.props.instances[this.props.index];
     this.isActualMounted = false;
     const el = this.ref.current;
     if (!el) return void 0;
-    ELEMENT_TO_NODE.delete(el);
     this.observer.unobserve(el);
   }
 
   public changeStatus = (mode: NodeState["mode"], height: number): void => {
     this.isActualMounted && this.setState({ mode, height: height || this.state.height });
+  };
+
+  public prevNode = (): Node | null => {
+    return this.props.instances[this.props.index - 1] || null;
+  };
+
+  public nextNode = (): Node | null => {
+    return this.props.instances[this.props.index + 1] || null;
   };
 
   render() {

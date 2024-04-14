@@ -2,34 +2,58 @@ import { useMemoizedFn } from "ahooks";
 import type { FC } from "react";
 import React, { useLayoutEffect, useMemo, useState } from "react";
 
-import { DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
+import { BATCH, DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
 import { Node } from "./node";
 
 export const VirtualizationMode: FC<{
   list: { id: number; content: JSX.Element }[];
 }> = props => {
+  const { list } = props;
   const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(1);
+  const [end, setEnd] = useState(BATCH);
   const startPlaceHolder = React.useRef<HTMLDivElement>(null);
   const endPlaceHolder = React.useRef<HTMLDivElement>(null);
   const [scroll, setScroll] = useState<HTMLDivElement | null>(null);
   const [observer, setObserver] = useState<IntersectionObserver | null>(null);
 
+  const instances: Node[] = useMemo(() => [], []);
   const record = useMemo(() => {
-    return Array.from({ length: props.list.length }, () => DEFAULT_HEIGHT);
-  }, [props.list]);
+    return Array.from({ length: list.length }, () => DEFAULT_HEIGHT);
+  }, [list]);
 
   const onIntersect = useMemoizedFn((entries: IntersectionObserverEntry[]) => {
     entries.forEach(entry => {
       const isIntersecting = entry.isIntersecting || entry.intersectionRatio > 0;
       if (entry.target === startPlaceHolder.current) {
         // 起始占位符进入视口
-        isIntersecting && setStart(index => Math.max(0, index - 1));
+        if (isIntersecting && entry.target.clientHeight > 0) {
+          const delta = entry.intersectionRect.height || 1;
+          let index = start - 1;
+          let count = 0;
+          let increment = 0;
+          while (index >= 0 && count < delta) {
+            count = count + record[index];
+            increment++;
+            index--;
+          }
+          setStart(index => Math.max(0, index - increment));
+        }
         return void 0;
       }
       if (entry.target === endPlaceHolder.current) {
         // 结束占位符进入视口
-        isIntersecting && setEnd(end => Math.min(props.list.length, end + 1));
+        if (isIntersecting && entry.target.clientHeight > 0) {
+          const delta = entry.intersectionRect.height || 1;
+          let index = end;
+          let count = 0;
+          let increment = 0;
+          while (index < list.length && count < delta) {
+            count = count + record[index];
+            increment++;
+            index++;
+          }
+          setEnd(end => Math.min(list.length, end + increment));
+        }
         return void 0;
       }
       const node = ELEMENT_TO_NODE.get(entry.target);
@@ -38,6 +62,17 @@ export const VirtualizationMode: FC<{
         return void 0;
       }
       const rect = entry.boundingClientRect;
+      record[node.props.index] = rect.height;
+      const prev = node.prevNode();
+      const next = node.nextNode();
+      const isActualFirstNode = prev?.state.mode !== "viewport" && next?.state.mode === "viewport";
+      const isActualLastNode = prev?.state.mode === "viewport" && next?.state.mode !== "viewport";
+      if (isActualFirstNode) {
+        setStart(node.props.index);
+      }
+      if (isActualLastNode) {
+        setEnd(node.props.index + 1);
+      }
       if (isIntersecting) {
         // 进入视口
         if (node.props.isFirstNode) {
@@ -47,7 +82,6 @@ export const VirtualizationMode: FC<{
           setEnd(end => Math.min(props.list.length, end + 1));
         }
         node.changeStatus("viewport", rect.height);
-        record[node.props.index] = rect.height;
       } else {
         // 脱离视口
         if (node.props.isFirstNode) {
@@ -90,10 +124,11 @@ export const VirtualizationMode: FC<{
       ></div>
       {observer && (
         <React.Fragment>
-          {props.list.slice(start, end).map((item, index) => (
+          {list.slice(start, Math.max(end, start + BATCH)).map((item, index) => (
             <Node
+              instances={instances}
               key={item.id}
-              index={index}
+              index={item.id}
               id={item.id}
               content={item.content}
               observer={observer}
