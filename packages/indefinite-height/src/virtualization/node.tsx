@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
+import { ELEMENT_TO_NODE } from "./bridge";
 
 type NodeProps = {
   id: number;
@@ -9,6 +9,8 @@ type NodeProps = {
   content: JSX.Element;
   isFirstNode?: boolean;
   isLastNode?: boolean;
+  initHeight: number;
+  scroll: HTMLDivElement | Window;
   observer: IntersectionObserver;
 };
 
@@ -26,7 +28,7 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
     super(props);
     this.state = {
       mode: "loading",
-      height: DEFAULT_HEIGHT, // 高度未知 未实际渲染时占位
+      height: props.initHeight, // 高度未知 未实际渲染时占位
     };
     this.ref = React.createRef();
     this.observer = props.observer;
@@ -61,9 +63,33 @@ export class Node extends React.PureComponent<NodeProps, NodeState> {
     return this.props.instances[this.props.index + 1] || null;
   };
 
+  componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<NodeState>): void {
+    if (prevState.mode === "loading" && this.state.mode === "viewport" && this.ref.current) {
+      const rect = this.ref.current.getBoundingClientRect();
+      const SCROLL_TOP = 0;
+      if (rect.height !== prevState.height && rect.top < SCROLL_TOP) {
+        this.scrollDeltaY(rect.height - prevState.height);
+      }
+    }
+  }
+
+  private scrollDeltaY = (deltaY: number): void => {
+    const scroll = this.props.scroll;
+    if (scroll instanceof Window) {
+      scroll.scrollTo({ top: scroll.scrollY + deltaY });
+    } else {
+      scroll.scrollTop = scroll.scrollTop + deltaY;
+    }
+  };
+
   render() {
     return (
-      <div ref={this.ref} data-state={this.state.mode}>
+      <div
+        ref={this.ref}
+        data-state={this.state.mode}
+        data-first={this.props.isFirstNode || undefined}
+        data-last={this.props.isLastNode || undefined}
+      >
         {this.state.mode === "loading" && (
           <div style={{ height: this.state.height }}>loading...</div>
         )}

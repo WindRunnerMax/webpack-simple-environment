@@ -2,7 +2,7 @@ import { useMemoizedFn } from "ahooks";
 import type { FC } from "react";
 import React, { useLayoutEffect, useMemo, useState } from "react";
 
-import { BATCH, DEFAULT_HEIGHT, ELEMENT_TO_NODE } from "./bridge";
+import { BATCH, DEFAULT_HEIGHT, ELEMENT_TO_NODE, THRESHOLD } from "./bridge";
 import { Node } from "./node";
 
 export const VirtualizationMode: FC<{
@@ -15,6 +15,28 @@ export const VirtualizationMode: FC<{
   const endPlaceHolder = React.useRef<HTMLDivElement>(null);
   const [scroll, setScroll] = useState<HTMLDivElement | null>(null);
   const [observer, setObserver] = useState<IntersectionObserver | null>(null);
+
+  const setSafeStart = useMemoizedFn((next: number | ((index: number) => number)) => {
+    if (typeof next === "function") {
+      setStart(v => {
+        const index = next(v);
+        return Math.min(Math.max(0, index), list.length);
+      });
+    } else {
+      setStart(Math.min(Math.max(0, next), list.length));
+    }
+  });
+
+  const setSafeEnd = useMemoizedFn((next: number | ((index: number) => number)) => {
+    if (typeof next === "function") {
+      setEnd(v => {
+        const index = next(v);
+        return Math.max(Math.min(list.length, index), 1);
+      });
+    } else {
+      setEnd(Math.max(Math.min(list.length, next), 1));
+    }
+  });
 
   const instances: Node[] = useMemo(() => [], []);
   const record = useMemo(() => {
@@ -36,7 +58,7 @@ export const VirtualizationMode: FC<{
             increment++;
             index--;
           }
-          setStart(index => Math.max(0, index - increment));
+          setSafeStart(index => index - increment);
         }
         return void 0;
       }
@@ -52,7 +74,7 @@ export const VirtualizationMode: FC<{
             increment++;
             index++;
           }
-          setEnd(end => Math.min(list.length, end + increment));
+          setSafeEnd(end => end + increment);
         }
         return void 0;
       }
@@ -68,27 +90,27 @@ export const VirtualizationMode: FC<{
       const isActualFirstNode = prev?.state.mode !== "viewport" && next?.state.mode === "viewport";
       const isActualLastNode = prev?.state.mode === "viewport" && next?.state.mode !== "viewport";
       if (isActualFirstNode) {
-        setStart(node.props.index);
+        setSafeStart(node.props.index - THRESHOLD);
       }
       if (isActualLastNode) {
-        setEnd(node.props.index + 1);
+        setSafeEnd(node.props.index + THRESHOLD);
       }
       if (isIntersecting) {
         // 进入视口
         if (node.props.isFirstNode) {
-          setStart(index => Math.max(0, index - 1));
+          setSafeStart(index => index - 1);
         }
         if (node.props.isLastNode) {
-          setEnd(end => Math.min(props.list.length, end + 1));
+          setSafeEnd(end => end + 1);
         }
         node.changeStatus("viewport", rect.height);
       } else {
         // 脱离视口
         if (node.props.isFirstNode) {
-          setStart(index => Math.min(props.list.length, index + 1));
+          setSafeStart(index => Math.min(props.list.length, index + 1));
         }
         if (node.props.isLastNode) {
-          setEnd(end => Math.max(1, end - 1));
+          setSafeEnd(end => end - 1);
         }
         if (node.state.mode !== "loading") {
           node.changeStatus("placeholder", rect.height);
@@ -122,10 +144,11 @@ export const VirtualizationMode: FC<{
         ref={startPlaceHolder}
         style={{ height: record.slice(0, start).reduce((a, b) => a + b, 0) }}
       ></div>
-      {observer && (
+      {scroll && observer && (
         <React.Fragment>
-          {list.slice(start, Math.max(end, start + BATCH)).map((item, index) => (
+          {list.slice(start, Math.max(end, start + BATCH)).map((item, index, current) => (
             <Node
+              scroll={scroll}
               instances={instances}
               key={item.id}
               index={item.id}
@@ -133,7 +156,8 @@ export const VirtualizationMode: FC<{
               content={item.content}
               observer={observer}
               isFirstNode={index === 0}
-              isLastNode={index === end - start - 1}
+              initHeight={record[item.id]}
+              isLastNode={index === current.length - 1}
             ></Node>
           ))}
         </React.Fragment>
