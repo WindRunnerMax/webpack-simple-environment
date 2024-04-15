@@ -20,6 +20,7 @@
 
 <tr>
 <td><a href="https://juejin.cn/post/7265515986471092239">初探webpack之从零搭建Vue开发环境</a></td>
+<td><a href="./packages/vue-cli">packages/vue-cli</a></td>
 </tr>
 
 <tr>
