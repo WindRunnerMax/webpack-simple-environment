@@ -1,0 +1,11 @@
+{
+  "name": "service-worker",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "anywhere -h localhost -p 7890",
+    "dev-python": "python3 -m http.server 9000 --bind 127.0.0.1"
+  },
+  "devDependencies": {
+    "anywhere": "1.6.0"
+  }
+}

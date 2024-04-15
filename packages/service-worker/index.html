@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Service Worker</title>
+    <style type="text/css">
+        .avatar{
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <img class="avatar" src="./static/avatar.png">
+    <script type="text/javascript">
+        navigator.serviceWorker
+            .register("sw.js")
+            .then(() => {
+                console.info("注册成功");
+            })
+            .catch(() => {
+                console.error("注册失败");
+            });
+    </script>
+    <script src="./static/cache.js"></script>
+</body>
+</html>
