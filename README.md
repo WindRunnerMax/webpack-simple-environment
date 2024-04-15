@@ -25,6 +25,7 @@
 
 <tr>
 <td><a href="https://juejin.cn/post/7265516410490535971">Vue首屏性能优化组件</a></td>
+<td><a href="./packages/vue-optimization">packages/vue-optimization</a></td>
 </tr>
 
 <tr>
