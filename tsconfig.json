@@ -23,6 +23,7 @@
     "paths": {},
   },
   "include": [
-    "packages/*/src"
+    "packages/*/src/**/*.ts",
+    "packages/*/src/**/*.tsx",
   ]
 }

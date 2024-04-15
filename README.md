@@ -15,6 +15,7 @@
 
 <tr>
 <td><a href="https://juejin.cn/post/7265516154847313954">初探webpack之编写plugin</a></td>
+<td><a href="./packages/webpack-plugin">packages/webpack-plugin</a></td>
 </tr>
 
 <tr>

@@ -1,5 +1,5 @@
 {
-  "name": "react-rspack-template",
+  "name": "webpack-simple-environment",
   "version": "1.0.0",
   "scripts": {
     "lint-es": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/WindrunnerMax/ReactRspackTemplate"
+    "url": "https://github.com/WindrunnerMax/webpack-simple-environment"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WindrunnerMax/ReactRspackTemplate/issues"
+    "url": "https://github.com/WindrunnerMax/webpack-simple-environment/issues"
   },
-  "homepage": "https://github.com/WindrunnerMax/ReactRspackTemplate",
+  "homepage": "https://github.com/WindrunnerMax/webpack-simple-environment",
   "devDependencies": {
     "@types/jest": "29.4.0",
     "@types/node": "20.11.10",
