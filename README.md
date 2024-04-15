@@ -30,10 +30,12 @@
 
 <tr>
 <td><a href="https://juejin.cn/post/7265516154847363106">Service Worker的应用</a></td>
+<td><a href="./packages/service-worker">packages/service-worker</a></td>
 </tr>
 
 <tr>
 <td><a href="https://juejin.cn/post/7265516484028383266">初探webpack之编写loader</a></td>
+<td><a href="./packages/webpack-loader">packages/webpack-loader</a></td>
 </tr>
 
 <tr>
