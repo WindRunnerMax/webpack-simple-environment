@@ -63,6 +63,10 @@
 </tr>
 
 <tr>
+<td><a href="https://juejin.cn/post/7265515986471550991">React闭包陷阱</a></td>
+<td><a href="./packages/react-closure-trap">packages/react-closure-trap</a></td>
+</tr>
+<tr>
 <td><a href="https://juejin.cn/post/7276990690546270247">ReactPortals传送门</a></td>
 <td><a href="./packages/react-portals">packages/react-portals</a></td>
 </tr>
