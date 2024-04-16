@@ -34,6 +34,15 @@
 </tr>
 
 <tr>
+<td><a href="https://juejin.cn/post/7265516410490732579">手写useState与useEffect</a></td>
+<td>
+<a href="./packages/react-use-state">packages/react-use-state</a><br>
+<a href="./packages/react-use-effect">packages/react-use-effect</a><br>
+<a href="./packages/react-use-update-effect">packages/react-use-update-effect</a><br>
+</td>
+</tr>
+
+<tr>
 <td><a href="https://juejin.cn/post/7265516484028383266">初探webpack之编写loader</a></td>
 <td><a href="./packages/webpack-loader">packages/webpack-loader</a></td>
 </tr>
