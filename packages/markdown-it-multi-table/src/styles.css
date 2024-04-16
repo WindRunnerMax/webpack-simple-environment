@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif;
+}
+
+th,
+td {
+  border: 1px solid #eee;
+  min-width: 20px;
+}
