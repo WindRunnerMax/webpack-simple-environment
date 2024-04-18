@@ -94,6 +94,11 @@
 </tr>
 
 <tr>
+<td><a href="https://juejin.cn/post/7354986873733349439">初探富文本之划词评论能力</a></td>
+<td><a href="./packages/quill-crdt-comment">packages/quill-crdt-comment</a></td>
+</tr>
+
+<tr>
 <td><a href="https://juejin.cn/post/7357390581301739531">基于React的虚拟滚动方案</a></td>
 <td>
 <a href="./packages/virtual-list-fixed-scroll">packages/virtual-list-fixed-scroll</a><br>
