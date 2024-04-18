@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-sandbox",
+  "version": "1.0.0",
+  "description": "Node.js example server starter project",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Ives van Hoorne",
+  "devDependencies": {
+    "express": "4.18.2",
+    "nodemon": "3.0.1"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "2.53.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sucrase": "3.34.0"
+  }
+}

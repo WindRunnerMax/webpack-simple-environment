@@ -66,14 +66,23 @@
 <td><a href="https://juejin.cn/post/7265515986471550991">React闭包陷阱</a></td>
 <td><a href="./packages/react-closure-trap">packages/react-closure-trap</a></td>
 </tr>
+
+<tr>
+<td><a href="https://juejin.cn/post/7265515986471600143">从零实现的Chrome扩展</a></td>
+<td><a href="./packages/chrome-extension">packages/chrome-extension</a></td>
+</tr>
+
 <tr>
 <td><a href="https://juejin.cn/post/7276990690546270247">ReactPortals传送门</a></td>
 <td><a href="./packages/react-portals">packages/react-portals</a></td>
 </tr>
 
 <tr>
-<td><a href="https://juejin.cn/post/7265515986471600143">从零实现的Chrome扩展</a></td>
-<td><a href="./packages/chrome-extension">packages/chrome-extension</a></td>
+<td><a href="https://juejin.cn/post/7279721119937511458">初探富文本之React实时预览</a></td>
+<td>
+<a href="./packages/react-dynamic">packages/react-dynamic</a><br>
+<a href="./packages/react-dynamic-ssr">packages/react-dynamic-ssr</a><br>
+</td>
 </tr>
 
 <tr>
