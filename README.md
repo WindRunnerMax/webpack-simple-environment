@@ -86,6 +86,14 @@
 </tr>
 
 <tr>
+<td><a href="https://juejin.cn/post/7337169269951676451">初探富文本之文档diff算法</a></td>
+<td>
+<a href="./packages/quill-delta-diff">packages/quill-delta-diff</a><br>
+<a href="./packages/quill-diff-view">packages/quill-diff-view</a><br>
+</td>
+</tr>
+
+<tr>
 <td><a href="https://juejin.cn/post/7357390581301739531">基于React的虚拟滚动方案</a></td>
 <td>
 <a href="./packages/virtual-list-fixed-scroll">packages/virtual-list-fixed-scroll</a><br>
