@@ -1,20 +1,9 @@
 {
-  "name": "fixed-height-scroll",
-  "version": "0.0.1",
+  "name": "react-render-ssg",
+  "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "sideEffects": [
-    "**/*.css",
-    "**/*.scss"
-  ],
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "dev": "rspack serve --config ./rspack.config.js",
-    "build": "rspack build --config ./rspack.config.js",
-    "analyze": "rspack build --config ./rspack.config.js --analyze"
+    "dev:basic": "ts-node ./src/basic/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +23,7 @@
     "copy-webpack-plugin": "5",
     "less": "4.2.0",
     "less-loader": "12.1.0",
-    "sass-loader": "13.3.3"
+    "sass-loader": "13.3.3",
+    "ts-node": "10.9.2"
   }
 }
