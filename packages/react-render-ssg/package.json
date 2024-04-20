@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && anywhere -h localhost -p 7891 -d dist -s",
-    "dev:rollup": "rm -rf dist && ts-node ./src/rollup/index.ts && anywhere -h localhost -p 7891 -d dist -s"
+    "dev": "anywhere -h localhost -p 7891 -d dist -s",
+    "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && npm run dev",
+    "dev:rollup": "rm -rf dist && ts-node ./src/rollup/index.ts && npm run dev",
+    "dev:rspack": "rm -rf dist && ts-node ./src/rspack/index.ts && npm run dev"
   },
   "keywords": [],
   "author": "",

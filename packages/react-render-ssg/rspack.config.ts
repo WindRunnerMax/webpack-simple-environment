@@ -1,14 +1,21 @@
-const path = require("path");
+import type { Configuration } from "@rspack/cli";
+import path from "path";
 
+const APP_NAME = "ReactSSG";
 const isDev = process.env.NODE_ENV === "development";
 
-/**
- * @type {import('@rspack/cli').Configuration}
- */
-module.exports = {
+const args = process.argv.slice(2);
+const map = args.reduce((acc, arg) => {
+  const [key, value] = arg.split("=");
+  acc[key] = value || "";
+  return acc;
+}, {} as Record<string, string>);
+const outputFileName = map["--output-filename"];
+
+export default {
   context: __dirname,
   entry: {
-    index: "./src/index.tsx",
+    index: "./src/rspack/app.tsx",
   },
   externals: {
     "react": "React",
@@ -18,7 +25,6 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "mono-utils": path.resolve(__dirname, "../utils/src"),
     },
   },
   builtins: {
@@ -39,20 +45,16 @@ module.exports = {
         style: false,
       },
     ],
+    banner: {
+      banner: `ReactDOM.hydrate(React.createElement(${APP_NAME}.default), document.getElementById("root"));`,
+      raw: true,
+      footer: true,
+      entryOnly: true,
+    },
   },
   module: {
     rules: [
       { test: /\.svg$/, type: "asset" },
-      {
-        test: /^(?!.*\.module\.scss$)(?!.*\.m\.scss$).*\.scss$/,
-        use: [{ loader: "sass-loader" }],
-        type: "css",
-      },
-      {
-        test: /\.(m|module).scss$/,
-        use: [{ loader: "sass-loader" }],
-        type: "css/module",
-      },
       {
         test: /\.less$/,
         use: [
@@ -74,14 +76,15 @@ module.exports = {
   devtool: isDev ? "source-map" : false,
   target: "es5",
   output: {
-    iife: false,
-    chunkFormat: "module",
+    chunkLoading: "jsonp",
+    chunkFormat: "array-push",
+    library: { name: APP_NAME, type: "assign" },
     publicPath: isDev ? "" : "./",
-    path: path.resolve(__dirname, "build"),
-    filename: isDev ? "[name].bundle.js" : "[name].[contenthash].js",
+    path: path.resolve(__dirname, "dist"),
+    filename: isDev ? "[name].bundle.js" : `${outputFileName}.js` || "[name].[contenthash].js",
     chunkFilename: isDev ? "[name].chunk.js" : "[name].[contenthash].js",
     assetModuleFilename: isDev ? "[name].[ext]" : "[name].[contenthash].[ext]",
   },
-};
+} as Configuration;
 
 // https://www.rspack.dev/
