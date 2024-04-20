@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && anywhere -h localhost -p 7891 -d dist -s",
-    "dev": "rm -rf build && ts-node ./src/framework/index.ts && anywhere -h localhost -p 7891 -d build -s"
+    "dev:rollup": "rm -rf dist && ts-node ./src/rollup/index.ts && anywhere -h localhost -p 7891 -d dist -s"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@rspack/cli": "0.2.5",
     "@rollup/plugin-commonjs": "22.0.1",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "5.0.4",

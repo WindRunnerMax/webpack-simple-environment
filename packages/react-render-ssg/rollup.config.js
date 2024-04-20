@@ -4,15 +4,16 @@ import replace from "@rollup/plugin-replace";
 import path from "path";
 import postcss from "rollup-plugin-postcss";
 import ts from "rollup-plugin-typescript2";
+
 const APP_NAME = "ReactSSG";
 const random = Math.random().toString(16).substring(7);
 
 export default async () => {
   return {
-    input: "./src/framework/app.tsx",
+    input: "./src/rollup/app.tsx",
     output: {
       name: APP_NAME,
-      file: `./build/${random}.js`,
+      file: `./dist/${random}.js`,
       format: "iife",
       globals: {
         "react": "React",
