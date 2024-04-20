@@ -391,6 +391,9 @@ importers:
       '@types/react-dom':
         specifier: 17.0.2
         version: 17.0.2
+      anywhere:
+        specifier: 1.6.0
+        version: 1.6.0
       copy-webpack-plugin:
         specifier: '5'
         version: 5.1.2(webpack@5.56.1)
@@ -404,7 +407,7 @@ importers:
         specifier: 13.3.3
         version: 13.3.3(sass@1.52.3)(webpack@5.56.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 10.9.2
         version: 10.9.2(@types/node@20.11.10)(typescript@5.3.2)
 
   packages/react-use-effect:
@@ -1097,7 +1100,7 @@ packages:
       number-precision: 1.6.0
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
-      react-focus-lock: 2.9.6(@types/react@17.0.1)(react@17.0.2)
+      react-focus-lock: 2.9.6(@types/react@17.0.2)(react@17.0.2)
       react-transition-group: 4.4.5(react-dom@17.0.2)(react@17.0.2)
       resize-observer-polyfill: 1.5.1
       scroll-into-view-if-needed: 2.2.20
