@@ -3,28 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && anywhere -h localhost -p 7891 -d dist -s"
+    "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && anywhere -h localhost -p 7891 -d dist -s",
+    "dev": "rm -rf build && ts-node ./src/framework/index.ts && anywhere -h localhost -p 7891 -d build -s"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@arco-design/web-react": "2.60.3",
-    "ahooks": "3.7.8",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@rspack/cli": "0.2.5",
-    "@rspack/plugin-html": "0.2.5",
-    "@types/node": "20.11.10",
+    "@rollup/plugin-commonjs": "22.0.1",
+    "@rollup/plugin-node-resolve": "13.3.0",
+    "@rollup/plugin-replace": "5.0.4",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
-    "copy-webpack-plugin": "5",
+    "anywhere": "1.6.0",
     "less": "4.2.0",
     "less-loader": "12.1.0",
-    "sass-loader": "13.3.3",
-    "ts-node": "10.9.2",
-    "anywhere": "1.6.0"
+    "rollup": "2.75.7",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-typescript2": "0.32.1",
+    "ts-node": "10.9.2"
   }
 }

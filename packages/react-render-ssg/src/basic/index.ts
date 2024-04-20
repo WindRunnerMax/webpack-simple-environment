@@ -34,7 +34,7 @@ ReactDOM.hydrate(_default, document.getElementById("root"));
 
 (async () => {
   const HTML = ReactDOMServer.renderToString(App);
-  const template = await fs.readFile("./src/basic/index.html", "utf-8");
+  const template = await fs.readFile("./public/index.html", "utf-8");
   await fs.mkdir("dist", { recursive: true });
   const random = Math.random().toString(16).substring(7);
   const jsPathName = `${random}.js`;
