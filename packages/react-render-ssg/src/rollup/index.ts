@@ -14,9 +14,9 @@ const exec = promisify(child.exec);
   const random = Math.random().toString(16).substring(7);
   const path = "./dist/";
   await exec(`npx rollup -c --file=${path + random}.js`);
-  const jsPathName = `${random}.js`;
+  const jsFileName = `${random}.js`;
   const html = template
     .replace(/<!-- INJECT HTML -->/, HTML)
-    .replace(/<!-- INJECT SCRIPT -->/, `<script src="${jsPathName}"></script>`);
+    .replace(/<!-- INJECT SCRIPT -->/, `<script src="${jsFileName}"></script>`);
   await fs.writeFile(`${path}index.html`, html);
 })();

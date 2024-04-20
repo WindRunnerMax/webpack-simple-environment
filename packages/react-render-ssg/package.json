@@ -17,15 +17,16 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@rspack/cli": "0.2.5",
     "@rollup/plugin-commonjs": "22.0.1",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "5.0.4",
+    "@rspack/cli": "0.2.5",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "anywhere": "1.6.0",
     "less": "4.2.0",
     "less-loader": "12.1.0",
+    "null-loader": "^4.0.1",
     "rollup": "2.75.7",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-typescript2": "0.32.1",

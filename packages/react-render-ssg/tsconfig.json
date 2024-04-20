@@ -3,9 +3,13 @@
   "include": [
     "./src/**/*",
   ],
+  "compilerOptions": {
+    "module": "esnext"
+  },
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "commonjs",
+      "esModuleInterop": true
     }
   }
 }

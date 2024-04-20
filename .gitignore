@@ -15,6 +15,7 @@ coverage
 build
 dist
 .cache
+.temp
 
 # misc
 .DS_Store

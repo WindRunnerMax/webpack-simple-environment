@@ -400,6 +400,9 @@ importers:
       less-loader:
         specifier: 12.1.0
         version: 12.1.0(less@4.2.0)(webpack@5.56.1)
+      null-loader:
+        specifier: ^4.0.1
+        version: 4.0.1(webpack@5.56.1)
       rollup:
         specifier: 2.75.7
         version: 2.75.7
@@ -1103,7 +1106,7 @@ packages:
       number-precision: 1.6.0
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
-      react-focus-lock: 2.9.6(@types/react@17.0.2)(react@17.0.2)
+      react-focus-lock: 2.9.6(@types/react@17.0.1)(react@17.0.2)
       react-transition-group: 4.4.5(react-dom@17.0.2)(react@17.0.2)
       resize-observer-polyfill: 1.5.1
       scroll-into-view-if-needed: 2.2.20
@@ -16113,6 +16116,17 @@ packages:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
       boolbase: 1.0.0
+
+  /null-loader@4.0.1(webpack@5.56.1):
+    resolution: {integrity: sha512-pxqVbi4U6N26lq+LmgIbB5XATP0VdZKOG25DhHi8btMmJJefGArFyDg1yc4U3hWCJbMqSrw0qyrz1UQX+qYXqg==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: 2.0.4
+      schema-utils: 3.3.0
+      webpack: 5.56.1(webpack-cli@4.8.0)
+    dev: true
 
   /num2fraction@1.2.2:
     resolution: {integrity: sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==}

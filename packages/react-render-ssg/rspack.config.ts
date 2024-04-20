@@ -1,7 +1,6 @@
 import type { Configuration } from "@rspack/cli";
 import path from "path";
 
-const APP_NAME = "ReactSSG";
 const isDev = process.env.NODE_ENV === "development";
 
 const args = process.argv.slice(2);
@@ -12,10 +11,10 @@ const map = args.reduce((acc, arg) => {
 }, {} as Record<string, string>);
 const outputFileName = map["--output-filename"];
 
-export default {
+const config: Configuration = {
   context: __dirname,
   entry: {
-    index: "./src/rspack/app.tsx",
+    index: "./.temp/client-side-entry.tsx",
   },
   externals: {
     "react": "React",
@@ -45,12 +44,6 @@ export default {
         style: false,
       },
     ],
-    banner: {
-      banner: `ReactDOM.hydrate(React.createElement(${APP_NAME}.default), document.getElementById("root"));`,
-      raw: true,
-      footer: true,
-      entryOnly: true,
-    },
   },
   module: {
     rules: [
@@ -78,13 +71,18 @@ export default {
   output: {
     chunkLoading: "jsonp",
     chunkFormat: "array-push",
-    library: { name: APP_NAME, type: "assign" },
     publicPath: isDev ? "" : "./",
     path: path.resolve(__dirname, "dist"),
-    filename: isDev ? "[name].bundle.js" : `${outputFileName}.js` || "[name].[contenthash].js",
+    filename: isDev
+      ? "[name].bundle.js"
+      : outputFileName
+      ? `${outputFileName}.js`
+      : "[name].[contenthash].js",
     chunkFilename: isDev ? "[name].chunk.js" : "[name].[contenthash].js",
     assetModuleFilename: isDev ? "[name].[ext]" : "[name].[contenthash].[ext]",
   },
-} as Configuration;
+};
+
+export default config;
 
 // https://www.rspack.dev/
