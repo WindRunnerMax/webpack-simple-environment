@@ -11,9 +11,12 @@ const exec = promisify(child.exec);
 (async () => {
   const HTML = ReactDOMServer.renderToString(React.createElement(App));
   const template = await fs.readFile("./public/index.html", "utf-8");
+
   const random = Math.random().toString(16).substring(7);
   const path = "./dist/";
-  await exec(`npx rollup -c --file=${path + random}.js`);
+  const { stdout } = await exec(`npx rollup -c --file=${path + random}.js`);
+  console.log("Client Compile Complete", stdout);
+
   const jsFileName = `${random}.js`;
   const html = template
     .replace(/<!-- INJECT HTML -->/, HTML)

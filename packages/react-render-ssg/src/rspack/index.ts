@@ -18,7 +18,8 @@ require.extensions[".less"] = () => undefined;
   await fs.mkdir(distPath, { recursive: true });
   await fs.mkdir(tempPath, { recursive: true });
 
-  await exec(`npx rspack -c ./rspack.server.ts`);
+  const { stdout: serverStdout } = await exec(`npx rspack -c ./rspack.server.ts`);
+  console.log("Server Compile", serverStdout);
   const nodeSideAppPath = path.resolve(tempPath, "node-side-entry.js");
   const nodeSideApp = require(nodeSideAppPath);
   const App = nodeSideApp.default;
@@ -37,9 +38,10 @@ require.extensions[".less"] = () => undefined;
   const HTML = ReactDOMServer.renderToString(React.createElement(App, defaultProps));
   const template = await fs.readFile("./public/index.html", "utf-8");
   const random = Math.random().toString(16).substring(7);
-  await exec(`npx rspack build -- --output-filename=${random}`);
-  const jsFileName = `${random}.js`;
+  const { stdout: clientStdout } = await exec(`npx rspack build -- --output-filename=${random}`);
+  console.log("Client Compile", clientStdout);
 
+  const jsFileName = `${random}.js`;
   const html = template
     .replace(/<!-- INJECT HTML -->/, HTML)
     .replace(/<!-- INJECT STYLE -->/, `<link rel="stylesheet" href="${random}.css">`)
