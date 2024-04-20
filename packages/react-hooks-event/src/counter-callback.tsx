@@ -17,6 +17,7 @@ export const CounterCallback: React.FC = () => {
     return () => {
       el?.removeEventListener("click", logCount1);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logCount2 = useCallback(() => {

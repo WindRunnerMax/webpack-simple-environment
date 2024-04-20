@@ -3,7 +3,7 @@ type State = typeof initialState;
 
 export const ACTION = {
   INCREMENT: "INCREMENT" as const,
-  SET: "SET" as const
+  SET: "SET" as const,
 };
 type IncrementAction = {
   type: typeof ACTION.INCREMENT;

@@ -1,4 +1,4 @@
-import { observable, action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, observable } from "mobx";
 
 class Store {
   constructor() {
@@ -7,7 +7,7 @@ class Store {
 
   @observable
   state = {
-    count: 1
+    count: 1,
   };
 
   @action

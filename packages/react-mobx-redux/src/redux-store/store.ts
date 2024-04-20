@@ -1,12 +1,12 @@
 import { createStore } from "redux";
 
 const defaultState: State = {
-  count: 1
+  count: 1,
 };
 
 export const actions = {
   SET_COUNT: "SET_COUNT" as const,
-  SET_COUNT_INCREMENT: "SET_COUNT_INCREMENT" as const
+  SET_COUNT_INCREMENT: "SET_COUNT_INCREMENT" as const,
 };
 
 const reducer = (state: State = defaultState, action: Actions): State => {

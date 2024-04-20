@@ -1,6 +1,8 @@
 import React from "react";
-import { AppDispatch, actions, State } from "./redux-store/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import type { AppDispatch, State } from "./redux-store/store";
+import { actions } from "./redux-store/store";
 
 const CountRedux: React.FC = () => {
   const count = useSelector((state: State) => state.count);
@@ -11,11 +13,7 @@ const CountRedux: React.FC = () => {
       <button onClick={() => dispatch({ type: actions.SET_COUNT, payload: 1 })}>
         Set Count value 1
       </button>
-      <button
-        onClick={() =>
-          dispatch({ type: actions.SET_COUNT_INCREMENT, payload: void 0 })
-        }
-      >
+      <button onClick={() => dispatch({ type: actions.SET_COUNT_INCREMENT, payload: void 0 })}>
         Set Count Increment
       </button>
     </div>

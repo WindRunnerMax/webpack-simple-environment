@@ -12,7 +12,7 @@ export const MultiCount: React.FC = () => {
   collect.push(() => count);
 
   const logCollect = () => {
-    collect.forEach((fn) => console.log(fn()));
+    collect.forEach(fn => console.log(fn()));
   };
 
   return (

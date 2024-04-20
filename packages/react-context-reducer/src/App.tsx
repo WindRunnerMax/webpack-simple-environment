@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { AppContext, AppProvider } from "./store/context";
 import { ACTION } from "./store/reducer";
 
@@ -10,12 +11,8 @@ const Children: React.FC = () => {
     <>
       Count: {state.count}
       <div>
-        <button onClick={() => dispatch({ type: ACTION.INCREMENT })}>
-          INCREMENT
-        </button>
-        <button onClick={() => dispatch({ type: ACTION.SET, payload: 10 })}>
-          SET 10
-        </button>
+        <button onClick={() => dispatch({ type: ACTION.INCREMENT })}>INCREMENT</button>
+        <button onClick={() => dispatch({ type: ACTION.SET, payload: 10 })}>SET 10</button>
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { CSSProperties } from "react";
 import type { ReactNode } from "react";
 import React from "react";
@@ -35,7 +36,7 @@ function getDOMPos(dom: HTMLElement) {
 export class TriggerSimple extends PureComponent<TriggerProps, TriggerState> {
   unmount = false;
   isDidMount = false;
-  delayTimer: number | undefined;
+  delayTimer: NodeJS.Timeout | undefined;
   popupContainer = document.body;
   childrenDom: HTMLElement | null = null;
   childrenDomSize: ReturnType<typeof getDOMPos> = {};
@@ -81,14 +82,14 @@ export class TriggerSimple extends PureComponent<TriggerProps, TriggerState> {
     return popupContainer;
   };
 
-  onMouseEnter = (e: any) => {
+  onMouseEnter = () => {
     console.log("onMouseEnter", this.childrenDom);
     const mouseEnterDelay = this.props.duration;
     this.clearDelayTimer();
     this.setPopupVisible(true, mouseEnterDelay || 0);
   };
 
-  onMouseLeave = (e: any) => {
+  onMouseLeave = () => {
     console.log("onMouseLeave", this.childrenDom);
     const mouseLeaveDelay = this.props.duration;
     this.clearDelayTimer();
@@ -103,7 +104,7 @@ export class TriggerSimple extends PureComponent<TriggerProps, TriggerState> {
     this.clearDelayTimer();
   };
 
-  onPopupMouseLeave = (e: any) => {
+  onPopupMouseLeave = () => {
     console.log("onPopupMouseLeave", this.childrenDom);
     // this.onMouseLeave(e);
     const mouseLeaveDelay = this.props.duration;

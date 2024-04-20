@@ -1,8 +1,10 @@
-import React from "react";
 import "./styles.css";
+
+import React from "react";
+import { Provider as ReduxProvider } from "react-redux";
+
 import CountMobx from "./counter-mobx";
 import CountRedux from "./counter-redux";
-import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./redux-store/store";
 
 const App: React.FC = () => {

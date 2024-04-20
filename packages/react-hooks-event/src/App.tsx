@@ -1,11 +1,12 @@
-import { CounterNormal } from "./counter-normal";
-import { CounterNative } from "./counter-native";
-import { CounterCallback } from "./counter-callback";
 import "./styles.css";
+
+import { CounterCallback } from "./counter-callback";
+import { CounterNative } from "./counter-native";
+import { CounterNormal } from "./counter-normal";
 
 interface Props {}
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = () => {
   return (
     <div>
       <div>Hooks事件绑定</div>

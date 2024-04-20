@@ -6,6 +6,8 @@ export type Range = {
 export const initLayerDOM = () => {
   const commentRangeDOM = document.createElement("div");
   commentRangeDOM.className = "ql-range ignore-dom layer-comment";
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   window.editor.container.appendChild(commentRangeDOM);
   return commentRangeDOM;
 };
@@ -14,7 +16,7 @@ const buildLayerDOM = (dom: HTMLElement, ranges: Range[]) => {
   const editor = window.editor;
   dom.innerText = "";
   const color = "rgb(255, 125, 0, 0.3)";
-  ranges.forEach((range) => {
+  ranges.forEach(range => {
     const startRect = editor.getBounds(range.index, 0);
     const endRect = editor.getBounds(range.index + range.length, 0);
     const block = document.createElement("div");
@@ -60,15 +62,12 @@ const buildLayerDOM = (dom: HTMLElement, ranges: Range[]) => {
   });
 };
 
-export const renderLayer = (
-  dom: HTMLDivElement,
-  origin: Range[],
-  ignoreLineMarker = true,
-) => {
+export const renderLayer = (dom: HTMLDivElement, origin: Range[], ignoreLineMarker = true) => {
   const lines: { start: number; length: number }[] = [];
   let currentIndex = 0;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  window.editor.scroll.lines().forEach((line) => {
+  window.editor.scroll.lines().forEach(line => {
     const length = line.length();
     lines.push({ start: currentIndex, length });
     currentIndex = currentIndex + length;
@@ -84,15 +83,12 @@ export const renderLayer = (
         !ignoreLineMarker && payload.length > 0 && ranges.push(payload);
         break;
       }
-      if (
-        index < line.start + line.length &&
-        line.start <= index + traceLength
-      ) {
+      if (index < line.start + line.length && line.start <= index + traceLength) {
         const nextIndex = Math.max(line.start, index);
         const nextLength = Math.min(
           traceLength,
           line.length - 1,
-          line.start + line.length - nextIndex,
+          line.start + line.length - nextIndex
         );
         traceLength = traceLength - nextLength;
         const payload = { index: nextIndex, length: nextLength };

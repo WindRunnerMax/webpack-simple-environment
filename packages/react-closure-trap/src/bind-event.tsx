@@ -15,6 +15,7 @@ export const BindEventCount: React.FC = () => {
     return () => {
       el?.removeEventListener("click", handler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

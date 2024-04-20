@@ -1,5 +1,5 @@
-import { MultiCount } from "./multi-count";
 import { BindEventCount } from "./bind-event";
+import { MultiCount } from "./multi-count";
 import { RefCount } from "./use-ref";
 
 const App: React.FC = () => {
