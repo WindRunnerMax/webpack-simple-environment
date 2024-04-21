@@ -4,7 +4,8 @@
     "./src/**/*",
   ],
   "compilerOptions": {
-    "module": "esnext"
+    "module": "esnext",
+    "jsx": "react"
   },
   "ts-node": {
     "compilerOptions": {

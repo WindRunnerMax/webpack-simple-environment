@@ -6,7 +6,7 @@
     "dev": "anywhere -h localhost -p 7891 -d dist -s",
     "dev:basic": "rm -rf dist && ts-node ./src/basic/index.ts && npm run dev",
     "dev:rollup": "rm -rf dist && ts-node ./src/rollup/index.ts && npm run dev",
-    "dev:rspack": "rm -rf dist && ts-node ./src/rspack/index.ts && npm run dev"
+    "dev:rspack": "rm -rf dist && node -r @swc-node/register ./src/rspack/index.ts && npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "5.0.4",
     "@rspack/cli": "0.2.5",
+    "@swc-node/register": "^1.9.0",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "anywhere": "1.6.0",
@@ -30,6 +31,7 @@
     "rollup": "2.75.7",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-typescript2": "0.32.1",
+    "swc-node": "^1.0.0",
     "ts-node": "10.9.2"
   }
 }
