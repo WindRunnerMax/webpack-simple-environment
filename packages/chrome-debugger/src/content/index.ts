@@ -1,9 +1,9 @@
 import { PCBridge } from "@/bridge/popup-content";
+import { isInIframe } from "@/utils/is";
+import { LOG_LEVEL, logger } from "@/utils/logger";
+
 import { onReceiveReloadMsg } from "../utils/reload";
 import { onPopupMessage } from "./channel/popup";
-import { LOG_LEVEL, logger } from "@/utils/logger";
-import { initializeWorker } from "./runtime/initialize";
-import { isInIframe } from "@/utils/is";
 import { implantScript } from "./runtime/script";
 
 (() => {
@@ -13,6 +13,5 @@ import { implantScript } from "./runtime/script";
   }
   logger.info("Content Script Loaded");
   implantScript();
-  !isInIframe && initializeWorker();
   PCBridge.onPopupMessage(onPopupMessage);
 })();

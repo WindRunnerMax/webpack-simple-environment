@@ -1,27 +1,17 @@
 import { decodeJSON, encodeJSON } from "laser-utils";
-import type { CIExecutionType } from "./constant";
 
 const EVENT_TYPE = process.env.EVENT_TYPE || "EVENT_TYPE_DG";
 
-const CI_REQUEST_ENUM = ["COPY_TYPE", "KEYBOARD_TYPE", "CONTEXT_MENU_TYPE"] as const;
+const CI_REQUEST_ENUM = ["COPY_ALL", "__"] as const;
 export const CONTENT_TO_INJECT_REQUEST = CI_REQUEST_ENUM.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof CI_REQUEST_ENUM[number]]: `__${K}__` }
+  (acc, cur) => ({ ...acc, [cur]: `__${cur}__CI__` }),
+  {} as { [K in typeof CI_REQUEST_ENUM[number]]: `__${K}___CI__` }
 );
 
-export type CIRequestType =
-  | {
-      type: typeof CONTENT_TO_INJECT_REQUEST.COPY_TYPE;
-      payload: CIExecutionType;
-    }
-  | {
-      type: typeof CONTENT_TO_INJECT_REQUEST.KEYBOARD_TYPE;
-      payload: CIExecutionType;
-    }
-  | {
-      type: typeof CONTENT_TO_INJECT_REQUEST.CONTEXT_MENU_TYPE;
-      payload: CIExecutionType;
-    };
+export type CIRequestType = {
+  type: typeof CONTENT_TO_INJECT_REQUEST.COPY_ALL;
+  payload: null;
+};
 
 export class CIBridge {
   public static readonly REQUEST = CONTENT_TO_INJECT_REQUEST;

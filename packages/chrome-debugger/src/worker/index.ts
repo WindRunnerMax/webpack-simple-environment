@@ -1,7 +1,8 @@
-import { LOG_LEVEL, logger } from "@/utils/logger";
-import { implantScript } from "./runtime/script";
 import { CWBridge } from "@/bridge/content-worker";
+import { LOG_LEVEL, logger } from "@/utils/logger";
+
 import { onContentMessage } from "./channel/content";
+import { implantScript } from "./runtime/script";
 
 (() => {
   if (__DEV__) {

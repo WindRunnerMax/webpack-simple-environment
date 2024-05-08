@@ -1,20 +1,17 @@
 {
-  "name": "force-copy",
-  "version": "1.0.6",
+  "name": "chrome-debugger",
+  "version": "1.0.0",
   "author": "Czy",
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development rspack build --watch",
     "build": "rm -rf build && rspack build",
-    "dev:rollup": "cross-env NODE_ENV=development rollup -wc",
-    "dev:gecko": "cross-env NODE_ENV=development PLATFORM=gecko rspack build --watch",
-    "build:gecko": "rm -rf build-gecko && cross-env PLATFORM=gecko rspack build",
     "lint:ts": "../../node_modules/typescript/bin/tsc --noEmit"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/WindrunnerMax/TKScript"
+    "url": "https://github.com/WindrunnerMax/webpack-simple-environment"
   },
   "dependencies": {
     "@arco-design/web-react": "2.50.0",
@@ -32,13 +29,5 @@
     "less-loader": "12.1.0",
     "sass-loader": "13.3.3",
     "ts-node": "10.9.1"
-  },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
-    ],
-    "*.{css,scss,less}": [
-      "stylelint --fix"
-    ]
   }
 }

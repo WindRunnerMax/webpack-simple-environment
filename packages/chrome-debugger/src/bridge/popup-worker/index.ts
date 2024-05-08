@@ -1,26 +1,21 @@
 import { cross } from "@/utils/global";
 
-const CW_REQUEST_TYPE = ["RELOAD", "SET_BADGE"] as const;
-export const CONTENT_TO_WORKER_REQUEST = CW_REQUEST_TYPE.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof CW_REQUEST_TYPE[number]]: `__${K}__` }
+const PW_REQUEST_TYPE = ["RELOAD", "__"] as const;
+export const CONTENT_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
+  (acc, cur) => ({ ...acc, [cur]: `__${cur}__PW__` }),
+  {} as { [K in typeof PW_REQUEST_TYPE[number]]: `__${K}__PW__` }
 );
 
-export type CWRequestType =
-  | {
-      type: typeof CONTENT_TO_WORKER_REQUEST.RELOAD;
-      payload: null;
-    }
-  | {
-      type: typeof CONTENT_TO_WORKER_REQUEST.SET_BADGE;
-      payload: number;
-    };
+export type PWRequestType = {
+  type: typeof CONTENT_TO_WORKER_REQUEST.RELOAD;
+  payload: null;
+};
 
-export class CWBridge {
+export class PWBridge {
   public static readonly REQUEST = CONTENT_TO_WORKER_REQUEST;
   public static readonly RESPONSE = null;
 
-  static async postToWorker(data: CWRequestType) {
+  static async postToWorker(data: PWRequestType) {
     return new Promise<null>(resolve => {
       if (cross.runtime.id) {
         cross.runtime.sendMessage(data).then(resolve);
@@ -30,9 +25,9 @@ export class CWBridge {
     });
   }
 
-  static onContentMessage(cb: (data: CWRequestType, sender: chrome.runtime.MessageSender) => null) {
+  static onPopupMessage(cb: (data: PWRequestType, sender: chrome.runtime.MessageSender) => null) {
     const handler = (
-      message: CWRequestType,
+      message: PWRequestType,
       sender: chrome.runtime.MessageSender,
       sendResponse: (response?: null) => void
     ) => {

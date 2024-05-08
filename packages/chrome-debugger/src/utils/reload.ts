@@ -1,4 +1,5 @@
 import { CWBridge } from "@/bridge/content-worker";
+
 import { cross } from "./global";
 import { logger } from "./logger";
 
