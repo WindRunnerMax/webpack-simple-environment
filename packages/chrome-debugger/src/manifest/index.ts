@@ -6,9 +6,9 @@ const __URL_MATCH__ = ["https://*/*", "http://*/*", "file://*/*"];
 // Chromium
 const __MANIFEST__: Record<string, unknown> = {
   manifest_version: 3,
-  name: "Force Copy",
+  name: "Chrome Debugger",
   version: "0.0.0",
-  description: "Force Copy Everything",
+  description: "Chrome Debugger Trust Event",
   default_locale: "en",
   icons: {
     32: "./static/favicon.128.png",
@@ -37,7 +37,7 @@ const __MANIFEST__: Record<string, unknown> = {
     service_worker: "worker.js",
   },
   host_permissions: [...__URL_MATCH__],
-  permissions: ["activeTab", "tabs", "scripting"],
+  permissions: ["activeTab", "tabs", "scripting", "debugger"],
   minimum_chrome_version: "88.0",
 };
 

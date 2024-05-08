@@ -1,24 +1,20 @@
+import type { EventMapToArray, RecordValues } from "@/types/spread";
 import { cross } from "@/utils/global";
 
-const PW_REQUEST_TYPE = ["RELOAD", "__"] as const;
-export const CONTENT_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
-  (acc, cur) => ({ ...acc, [cur]: `__${cur}__PW__` }),
-  {} as { [K in typeof PW_REQUEST_TYPE[number]]: `__${K}__PW__` }
-);
-
-export type PWRequestType = {
-  type: typeof CONTENT_TO_WORKER_REQUEST.RELOAD;
-  payload: null;
-};
+import type { PWRequestMap, PWRequestType } from "./request";
+import { POPUP_TO_WORKER_REQUEST } from "./request";
 
 export class PWBridge {
-  public static readonly REQUEST = CONTENT_TO_WORKER_REQUEST;
+  public static readonly REQUEST = POPUP_TO_WORKER_REQUEST;
   public static readonly RESPONSE = null;
 
-  static async postToWorker(data: PWRequestType) {
+  static async postToWorker(
+    ...args: EventMapToArray<RecordValues<typeof POPUP_TO_WORKER_REQUEST>, PWRequestMap>
+  ) {
+    const [type, payload] = args;
     return new Promise<null>(resolve => {
       if (cross.runtime.id) {
-        cross.runtime.sendMessage(data).then(resolve);
+        cross.runtime.sendMessage({ type, payload }).then(resolve);
       } else {
         resolve(null);
       }
