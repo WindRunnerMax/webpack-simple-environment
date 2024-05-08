@@ -1,5 +1,5 @@
-import type { EventMapToArray, RecordValues } from "@/types/spread";
 import { cross } from "@/utils/global";
+import type { EventMapToArray, RecordValues } from "@/utils/types";
 
 import type { PWRequestMap, PWRequestType } from "./request";
 import { POPUP_TO_WORKER_REQUEST } from "./request";

@@ -1,4 +1,4 @@
-import type { EventMapToRecord, RecordValues } from "@/types/spread";
+import type { EventMapToRecord, RecordValues } from "@/utils/types";
 
 const PW_REQUEST_TYPE = ["START_CDP", "__"] as const;
 export const POPUP_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
