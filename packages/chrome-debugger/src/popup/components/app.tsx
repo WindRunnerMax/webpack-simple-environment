@@ -2,15 +2,34 @@ import { Button } from "@arco-design/web-react";
 import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
 import { cs } from "laser-utils";
 import type { FC } from "react";
+import { useState } from "react";
 
+import { PCBridge } from "@/bridge/popup-content";
 import { PWBridge } from "@/bridge/popup-worker";
 import { cross } from "@/utils/global";
 
 import styles from "./index.module.scss";
 
 export const App: FC = () => {
-  const onStartCDP = () => {
-    PWBridge.postToWorker(PWBridge.REQUEST.START_CDP, null);
+  const [loading, setLoading] = useState(false);
+
+  const onClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      PCBridge.postToContent({
+        type: PCBridge.REQUEST.COPY_ALL,
+        payload: null,
+      });
+      setLoading(false);
+    }, 5000);
+  };
+
+  const onDevTools = () => {
+    setLoading(true);
+    setTimeout(() => {
+      PWBridge.postToWorker(PWBridge.REQUEST.COPY_ALL, null);
+      setLoading(false);
+    }, 5000);
   };
 
   return (
@@ -23,8 +42,14 @@ export const App: FC = () => {
       <div className={styles.hr}></div>
 
       <div className={styles.console}>
-        <Button>JavaScript方法</Button>
-        <Button onClick={onStartCDP}>DevTools Protocol方法</Button>
+        <div className={styles.line}>
+          <Button loading={loading} type="primary" onClick={onClick}>
+            JavaScript
+          </Button>
+          <Button loading={loading} type="primary" onClick={onDevTools}>
+            DevTools
+          </Button>
+        </div>
       </div>
 
       <div className={styles.hr}></div>

@@ -7,9 +7,9 @@ import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
 
 export const onPopupMessage = (data: PWRequestType) => {
-  logger.info("Worker Receive Popup Message", data);
+  logger.info("Worker Receive Message", data);
   switch (data.type) {
-    case PWBridge.REQUEST.START_CDP: {
+    case PWBridge.REQUEST.COPY_ALL: {
       cross.tabs
         .query({ active: true, currentWindow: true })
         .then(tabs => {
@@ -19,28 +19,31 @@ export const onPopupMessage = (data: PWRequestType) => {
           if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
             return void 0;
           }
-          if (!isEmptyValue(tabId)) {
-            // https://chromedevtools.github.io/devtools-protocol/
-            chrome.debugger.attach({ tabId }, "1.2", () => {
-              chrome.debugger
-                .sendCommand({ tabId }, "Input.dispatchKeyEvent", {
-                  type: "keyDown",
-                  modifiers: 4,
-                  keyCode: 65,
-                  key: "a",
-                  code: "KeyA",
-                  windowsVirtualKeyCode: 65,
-                  nativeVirtualKeyCode: 65,
-                  isSystemKey: true,
-                  commands: ["selectAll"],
-                })
-                .then(() => {
-                  chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
-                    expression: "document.execCommand('copy')",
-                  });
-                });
+          return tabId;
+        })
+        .then(tabId => {
+          if (isEmptyValue(tabId)) return void 0;
+          // https://chromedevtools.github.io/devtools-protocol/
+          chrome.debugger
+            .attach({ tabId }, "1.2")
+            .then(() =>
+              chrome.debugger.sendCommand({ tabId }, "Input.dispatchKeyEvent", {
+                type: "keyDown",
+                modifiers: 4,
+                keyCode: 65,
+                key: "a",
+                code: "KeyA",
+                windowsVirtualKeyCode: 65,
+                nativeVirtualKeyCode: 65,
+                isSystemKey: true,
+                commands: ["selectAll"],
+              })
+            )
+            .then(() => {
+              chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
+                expression: "document.execCommand('copy')",
+              });
             });
-          }
         })
         .catch(error => {
           logger.warning("Send Message Error", error);
