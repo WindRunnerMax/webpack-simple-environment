@@ -1,5 +1,5 @@
 import { Button } from "@arco-design/web-react";
-import { IconGithub, IconQuestionCircle, IconRefresh } from "@arco-design/web-react/icon";
+import { IconFile, IconGithub, IconRefresh } from "@arco-design/web-react/icon";
 import { cs } from "laser-utils";
 import type { FC } from "react";
 import { useState } from "react";
@@ -32,6 +32,10 @@ export const App: FC = () => {
     }, 5000);
   };
 
+  const onPrintPDF = () => {
+    PWBridge.postToWorker(PWBridge.REQUEST.PDF, null);
+  };
+
   return (
     <div className={cs(styles.container)}>
       <div className={cs(styles.captain)}>
@@ -55,18 +59,18 @@ export const App: FC = () => {
       <div className={styles.hr}></div>
 
       <div className={styles.footer}>
+        <a onClick={onPrintPDF}>
+          <IconFile />
+          PDF
+        </a>
         <a
+          style={{ marginLeft: 10 }}
           onClick={() => window.open("https://github.com/WindrunnerMax/webpack-simple-environment")}
         >
           <IconGithub />
           GitHub
         </a>
-        <a
-          onClick={() => window.open("https://github.com/WindrunnerMax/webpack-simple-environment")}
-        >
-          <IconQuestionCircle />
-          Help
-        </a>
+
         {__DEV__ && (
           <a onClick={() => cross.runtime.reload()}>
             <IconRefresh />

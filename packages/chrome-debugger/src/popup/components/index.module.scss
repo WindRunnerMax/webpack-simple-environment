@@ -1,6 +1,7 @@
 .container {
   color: var(--color-text-1);
   padding: 10px;
+  user-select: none;
   width: 270px;
 }
 

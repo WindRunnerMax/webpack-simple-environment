@@ -32,7 +32,7 @@ export class CWBridge {
       sendResponse: (response?: null) => void
     ) => {
       const rtn = cb(message, sender);
-      sendResponse(rtn || null);
+      rtn && sendResponse(rtn || null);
     };
     cross.runtime.onMessage.addListener(handler);
     return () => {

@@ -10,6 +10,7 @@ export const onPopupMessage = (data: PCRequestType) => {
     case PCBridge.REQUEST.COPY_ALL: {
       document.execCommand("selectAll");
       document.execCommand("copy");
+      break;
     }
   }
 };
