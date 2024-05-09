@@ -37,7 +37,7 @@ const __MANIFEST__: Record<string, unknown> = {
     service_worker: "worker.js",
   },
   host_permissions: [...__URL_MATCH__],
-  permissions: ["activeTab", "tabs", "scripting", "debugger"],
+  permissions: ["activeTab", "tabs", "scripting", "debugger", "downloads"],
   minimum_chrome_version: "88.0",
 };
 

@@ -2,7 +2,6 @@ import { isEmptyValue, TSON } from "laser-utils";
 
 import { PWBridge } from "@/bridge/popup-worker";
 import type { PWRequestType } from "@/bridge/popup-worker/request";
-import { WCBridge } from "@/bridge/worker-content";
 import { URL_MATCH } from "@/utils/constant";
 import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
@@ -87,7 +86,7 @@ export const onPopupMessage = (data: PWRequestType) => {
             .then(res => {
               // @ts-expect-error object
               const base64 = res.data as string;
-              WCBridge.postToContent({ type: WCBridge.REQUEST.PDF_DATA, payload: base64 });
+              chrome.downloads.download({ url: `data:application/pdf;base64,${base64}` });
             })
             .finally(() => {
               chrome.debugger.detach({ tabId });
