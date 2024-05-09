@@ -81,6 +81,7 @@ export const onPopupMessage = (data: PWRequestType) => {
               return chrome.debugger.sendCommand({ tabId }, "Page.printToPDF", {
                 paperHeight: rect ? rect.height / 96 : undefined,
                 paperWidth: rect ? rect.width / 96 : undefined,
+                generateDocumentOutline: true,
               });
             })
             .then(res => {
