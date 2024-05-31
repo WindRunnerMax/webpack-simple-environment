@@ -29,14 +29,14 @@ app.use("/", function (req, res) {
     `<html>
        <head>
          <title>Example</title>
-         <link rel="stylesheet" href="https://registry.npmmirror.com/@arco-design/web-react/2.53.0/files/dist/css/arco.min.css">
+         <link rel="stylesheet" href="https://unpkg.com/@arco-design/web-react@2.53.0/dist/css/arco.min.css">
          <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/react/17.0.2/umd/react.production.min.js" type="application/javascript"></script>
          <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/react-dom/17.0.2/umd/react-dom.production.min.js" type="application/javascript"></script>
        </head>
        <body>
          <div id="root">${content}</div>
        </body>
-       <script src="https://registry.npmmirror.com/@arco-design/web-react/2.53.0/files/dist/arco.min.js"></script>
+       <script src="https://unpkg.com/@arco-design/web-react@2.53.0/dist/arco.min.js"></script>
        <script>
         const App = () => { // 客户端的\`React\`组件
           const ref = React.useRef(null);
