@@ -1,5 +1,5 @@
 # webpack-simple-environment
-`webpack`搭建的简单环境，主要为博客相关代码使用，每篇博客都配置有不同的代码路径作为演示示例。
+`webpack/vite/rspack`搭建的简单环境，主要为博客相关代码使用，每篇博客都配置有不同的代码路径作为演示示例。
 
 
 <table>
@@ -106,6 +106,11 @@
 <a href="./packages/virtual-list-virtualization">packages/virtual-list-virtualization</a><br>
 <a href="./packages/virtual-list-dynamic-scroll">packages/virtual-list-dynamic-scroll</a>
 </td>
+</tr>
+
+<tr>
+<td><a href=""></a></td>
+<td><a href="./packages/react-render-ssg">packages/react-render-ssg</a></td>
 </tr>
 
 </tbody>

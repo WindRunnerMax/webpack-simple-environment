@@ -7,6 +7,7 @@
         "Rspack",
         "TSON",
         "undoable",
+        "vite",
         "webrtc"
     ]
 }
