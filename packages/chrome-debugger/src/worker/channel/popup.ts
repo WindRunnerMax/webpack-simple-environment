@@ -26,8 +26,8 @@ export const onPopupMessage = (data: PWRequestType) => {
           // https://chromedevtools.github.io/devtools-protocol/
           chrome.debugger
             .attach({ tabId }, "1.2")
-            .then(() =>
-              chrome.debugger.sendCommand({ tabId }, "Input.dispatchKeyEvent", {
+            .then(() => {
+              return chrome.debugger.sendCommand({ tabId }, "Input.dispatchKeyEvent", {
                 type: "keyDown",
                 modifiers: 4,
                 keyCode: 65,
@@ -37,10 +37,10 @@ export const onPopupMessage = (data: PWRequestType) => {
                 nativeVirtualKeyCode: 65,
                 isSystemKey: true,
                 commands: ["selectAll"],
-              })
-            )
+              });
+            })
             .then(() => {
-              chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
+              return chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
                 expression: "document.execCommand('copy')",
               });
             })
@@ -67,12 +67,12 @@ export const onPopupMessage = (data: PWRequestType) => {
           // https://chromedevtools.github.io/devtools-protocol/
           chrome.debugger
             .attach({ tabId }, "1.2")
-            .then(() =>
-              chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
+            .then(() => {
+              return chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
                 expression:
                   "JSON.stringify({width: document.body.clientWidth, height: document.body.scrollHeight})",
-              })
-            )
+              });
+            })
             .then(res => {
               // @ts-expect-error string
               const value = res.result.value as string;

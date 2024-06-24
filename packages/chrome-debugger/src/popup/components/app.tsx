@@ -1,5 +1,5 @@
 import { Button } from "@arco-design/web-react";
-import { IconFile, IconGithub, IconRefresh } from "@arco-design/web-react/icon";
+import { IconApps, IconGithub, IconRefresh } from "@arco-design/web-react/icon";
 import { cs } from "laser-utils";
 import type { FC } from "react";
 import { useState } from "react";
@@ -60,7 +60,7 @@ export const App: FC = () => {
 
       <div className={styles.footer}>
         <a onClick={onPrintPDF}>
-          <IconFile />
+          <IconApps />
           PDF
         </a>
         <a
