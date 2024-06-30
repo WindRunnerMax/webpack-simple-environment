@@ -41,7 +41,7 @@ export const onPopupMessage = (data: PWRequestType) => {
             })
             .then(() => {
               return chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
-                expression: "document.execCommand('copy')",
+                expression: "const res = document.execCommand('copy'); console.log(res);",
               });
             })
             .finally(() => {
@@ -66,7 +66,7 @@ export const onPopupMessage = (data: PWRequestType) => {
           if (isEmptyValue(tabId)) return void 0;
           // https://chromedevtools.github.io/devtools-protocol/
           chrome.debugger
-            .attach({ tabId }, "1.2")
+            .attach({ tabId }, "1.3")
             .then(() => {
               return chrome.debugger.sendCommand({ tabId }, "Runtime.evaluate", {
                 expression:
@@ -80,6 +80,8 @@ export const onPopupMessage = (data: PWRequestType) => {
               return chrome.debugger.sendCommand({ tabId }, "Page.printToPDF", {
                 paperHeight: rect ? rect.height / 96 : undefined,
                 paperWidth: rect ? rect.width / 96 : undefined,
+                pageRanges: "1",
+                printBackground: true,
                 generateDocumentOutline: true,
               });
             })
