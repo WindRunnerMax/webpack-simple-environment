@@ -109,8 +109,13 @@
 </tr>
 
 <tr>
-<td><a href=""></a></td>
+<td><a href="https://juejin.cn/post/7375426024705769482">基于React的SSG渲染方案</a></td>
 <td><a href="./packages/react-render-ssg">packages/react-render-ssg</a></td>
+</tr>
+
+<tr>
+<td><a href="https://juejin.cn/post/7385926039807082531">基于Chrome扩展的浏览器事件</a></td>
+<td><a href="./packages/chrome-debugger">packages/chrome-debugger</a></td>
 </tr>
 
 </tbody>
