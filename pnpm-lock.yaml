@@ -1058,6 +1058,36 @@ importers:
         specifier: 4.3.1
         version: 4.3.1(webpack-cli@4.10.0)(webpack@5.56.1)
 
+  packages/webpack-loaders:
+    devDependencies:
+      cross-env:
+        specifier: 7.0.3
+        version: 7.0.3
+      css-loader:
+        specifier: 6.4.0
+        version: 6.4.0(webpack@5.56.1)
+      html-webpack-plugin:
+        specifier: 5.3.2
+        version: 5.3.2(webpack@5.56.1)
+      less:
+        specifier: 4.2.0
+        version: 4.2.0
+      less-loader:
+        specifier: 12.1.0
+        version: 12.1.0(less@4.2.0)(webpack@5.56.1)
+      ts-loader:
+        specifier: 9.2.6
+        version: 9.2.6(typescript@5.3.2)(webpack@5.56.1)
+      tslib:
+        specifier: 2.6.2
+        version: 2.6.2
+      webpack:
+        specifier: 5.56.1
+        version: 5.56.1(webpack-cli@4.8.0)
+      webpack-dev-server:
+        specifier: 4.11.1
+        version: 4.11.1(webpack@5.56.1)
+
   packages/webpack-plugin:
     devDependencies:
       cross-env:
@@ -5414,7 +5444,7 @@ packages:
   /@types/eslint@7.29.0:
     resolution: {integrity: sha512-VNcvioYDH8/FxaeTKkM4/TiTwt6pBV9E3OfGmvaw8tPl0rrHCJ4Ll15HRT+pMiFAf/MLQvAzC+6RzUMEL9Ceng==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
     dev: false
 
@@ -5434,6 +5464,7 @@ packages:
 
   /@types/estree@0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
+    dev: true
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -9134,6 +9165,20 @@ packages:
 
   /chokidar@3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
+    engines: {node: '>= 8.10.0'}
+    dependencies:
+      anymatch: 3.1.3
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.3
+      normalize-path: 3.0.0
+      readdirp: 3.6.0
+    optionalDependencies:
+      fsevents: 2.3.2
+
+  /chokidar@3.6.0:
+    resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
     dependencies:
       anymatch: 3.1.3
@@ -16058,6 +16103,7 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+    dev: true
 
   /nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
@@ -18169,12 +18215,12 @@ packages:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  /postcss-sorting@7.0.1(postcss@8.4.21):
+  /postcss-sorting@7.0.1(postcss@8.4.38):
     resolution: {integrity: sha512-iLBFYz6VRYyLJEJsBJ8M3TCqNcckVzz4wFounSc5Oez35ogE/X+aoC5fFu103Ot7NyvjU3/xqIXn93Gp3kJk4g==}
     peerDependencies:
       postcss: ^8.3.9
     dependencies:
-      postcss: 8.4.21
+      postcss: 8.4.38
     dev: true
 
   /postcss-svgo@2.1.6:
@@ -18302,7 +18348,7 @@ packages:
     resolution: {integrity: sha512-f/ZFyAKh9Dnqytx5X62jgjhhzttjZS7hMsohcI7HEI5tjELX/HxCy3EFhsRxyzGvrzFF+82XPvCS8T9TFleVJw==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.4
+      nanoid: 3.3.7
       picocolors: 0.2.1
       source-map-js: 0.6.2
 
@@ -19460,6 +19506,7 @@ packages:
 
   /rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3
@@ -19472,6 +19519,7 @@ packages:
 
   /rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3
@@ -20744,8 +20792,8 @@ packages:
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      postcss: 8.4.21
-      postcss-sorting: 7.0.1(postcss@8.4.21)
+      postcss: 8.4.38
+      postcss-sorting: 7.0.1(postcss@8.4.38)
       stylelint: 14.7.1
     dev: true
 
@@ -22409,7 +22457,7 @@ packages:
       graceful-fs: 4.2.11
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       watchpack-chokidar2: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -22580,8 +22628,8 @@ packages:
       webpack: 4.44.2
       webpack-log: 2.0.0
 
-  /webpack-dev-middleware@5.3.3(webpack@5.56.1):
-    resolution: {integrity: sha512-hj5CYrY0bZLB+eTO+x/j67Pkrquiy7kWepMHmUMoPsmcUaeEnQJqFzHJOyxgWlq746/wUuA64p9ta34Kyb01pA==}
+  /webpack-dev-middleware@5.3.4(webpack@5.56.1):
+    resolution: {integrity: sha512-BVdTqhhs+0IfoeAf7EoH5WE+exCmqGerHfDM0IL096Px60Tq2Mn9MAbnaGUe6HiMa41KMCYF19gyzZmBcq/o4Q==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
@@ -22594,8 +22642,8 @@ packages:
       webpack: 5.56.1(webpack-cli@4.10.0)
     dev: true
 
-  /webpack-dev-middleware@5.3.3(webpack@5.76.0):
-    resolution: {integrity: sha512-hj5CYrY0bZLB+eTO+x/j67Pkrquiy7kWepMHmUMoPsmcUaeEnQJqFzHJOyxgWlq746/wUuA64p9ta34Kyb01pA==}
+  /webpack-dev-middleware@5.3.4(webpack@5.76.0):
+    resolution: {integrity: sha512-BVdTqhhs+0IfoeAf7EoH5WE+exCmqGerHfDM0IL096Px60Tq2Mn9MAbnaGUe6HiMa41KMCYF19gyzZmBcq/o4Q==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
@@ -22674,6 +22722,54 @@ packages:
       - bufferutil
       - utf-8-validate
 
+  /webpack-dev-server@4.11.1(webpack@5.56.1):
+    resolution: {integrity: sha512-lILVz9tAUy1zGFwieuaQtYiadImb5M3d+H+L1zDYalYoDl0cksAB1UNyuE5MMWJrG6zR1tXkCP2fitl7yoUJiw==}
+    engines: {node: '>= 12.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack: ^4.37.0 || ^5.0.0
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/bonjour': 3.5.13
+      '@types/connect-history-api-fallback': 1.5.4
+      '@types/express': 4.17.21
+      '@types/serve-index': 1.9.4
+      '@types/serve-static': 1.15.5
+      '@types/sockjs': 0.3.36
+      '@types/ws': 8.5.10
+      ansi-html-community: 0.0.8
+      bonjour-service: 1.1.1
+      chokidar: 3.6.0
+      colorette: 2.0.20
+      compression: 1.7.4(supports-color@6.1.0)
+      connect-history-api-fallback: 2.0.0
+      default-gateway: 6.0.3
+      express: 4.18.2(supports-color@6.1.0)
+      graceful-fs: 4.2.11
+      html-entities: 2.4.0
+      http-proxy-middleware: 2.0.6(@types/express@4.17.21)
+      ipaddr.js: 2.1.0
+      open: 8.4.2
+      p-retry: 4.6.2
+      rimraf: 3.0.2
+      schema-utils: 4.2.0
+      selfsigned: 2.4.1
+      serve-index: 1.9.1(supports-color@6.1.0)
+      sockjs: 0.3.24
+      spdy: 4.0.2
+      webpack: 5.56.1(webpack-cli@4.8.0)
+      webpack-dev-middleware: 5.3.4(webpack@5.56.1)
+      ws: 8.8.1
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+    dev: true
+
   /webpack-dev-server@4.13.1(webpack@5.76.0):
     resolution: {integrity: sha512-5tWg00bnWbYgkN+pd5yISQKDejRBYGEw15RaEEslH+zdbNDxxaZvEAO2WulaSaFKb5n3YG8JXsGaDsut1D0xdA==}
     engines: {node: '>= 12.13.0'}
@@ -22696,7 +22792,7 @@ packages:
       '@types/ws': 8.5.10
       ansi-html-community: 0.0.8
       bonjour-service: 1.1.1
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       colorette: 2.0.20
       compression: 1.7.4(supports-color@6.1.0)
       connect-history-api-fallback: 2.0.0
@@ -22716,8 +22812,8 @@ packages:
       sockjs: 0.3.24
       spdy: 4.0.2
       webpack: 5.76.0
-      webpack-dev-middleware: 5.3.3(webpack@5.76.0)
-      ws: 8.15.1
+      webpack-dev-middleware: 5.3.4(webpack@5.76.0)
+      ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -22738,8 +22834,8 @@ packages:
     dependencies:
       ansi-html-community: 0.0.8
       bonjour: 3.5.0
-      chokidar: 3.5.3
-      colorette: 2.0.19
+      chokidar: 3.6.0
+      colorette: 2.0.20
       compression: 1.7.4(supports-color@6.1.0)
       connect-history-api-fallback: 1.6.0
       del: 6.1.1
@@ -22761,8 +22857,8 @@ packages:
       url: 0.11.3
       webpack: 5.56.1(webpack-cli@4.10.0)
       webpack-cli: 4.10.0(webpack-dev-server@4.3.1)(webpack@5.56.1)
-      webpack-dev-middleware: 5.3.3(webpack@5.56.1)
-      ws: 8.15.1
+      webpack-dev-middleware: 5.3.4(webpack@5.56.1)
+      ws: 8.8.1
     transitivePeerDependencies:
       - '@types/express'
       - bufferutil
@@ -23437,8 +23533,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  /ws@8.15.1:
-    resolution: {integrity: sha512-W5OZiCjXEmk0yZ66ZN82beM5Sz7l7coYxpRkzS+p9PP+ToQry8szKh+61eNktr7EA9DOwvFGhfC605jDHbP6QQ==}
+  /ws@8.18.0:
+    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1

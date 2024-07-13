@@ -1,0 +1,21 @@
+{
+  "name": "webpack-loaders",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "css-loader": "6.4.0",
+    "html-webpack-plugin": "5.3.2",
+    "ts-loader": "9.2.6",
+    "tslib": "2.6.2",
+    "less": "4.2.0",
+    "less-loader": "12.1.0",
+    "webpack": "5.56.1",
+    "webpack-dev-server": "4.11.1"
+  }
+}
