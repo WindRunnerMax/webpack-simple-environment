@@ -1,20 +1,34 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const entries = {
+  less: "./src/less/index.ts",
+  loader: "./src/loader/index.ts",
+  resolver: "./src/resolver/index.ts",
+};
+
+const HTMLPlugins = Object.keys(entries).map(
+  key =>
+    new HtmlWebpackPlugin({
+      filename: `${key}.html`,
+      template: path.resolve("./public/index.html"),
+      hash: true,
+      chunks: [key],
+      scriptLoading: "defer",
+    })
+);
+
 /**
  * @typedef {import("webpack").Configuration} WebpackConfig
  * @typedef {import("webpack-dev-server").Configuration} WebpackDevServerConfig
- */
-
-/**
  * @type {WebpackConfig & {devServer?: WebpackDevServerConfig}}
  */
 module.exports = {
   context: __dirname,
   mode: process.env.NODE_ENV,
-  entry: "./src/index.ts",
+  entry: entries,
   output: {
-    filename: "index.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "build"),
   },
   resolve: {
@@ -44,10 +58,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "index.html",
+      filename: `index.html`,
       template: path.resolve("./public/index.html"),
-      hash: true,
+      chunks: [],
       scriptLoading: "defer",
     }),
+    ...HTMLPlugins,
   ],
 };
