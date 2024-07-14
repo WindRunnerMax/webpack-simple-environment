@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const LessImportPrefix = require("./src/less/import-prefix");
 
 const entries = {
   less: "./src/less/index.ts",
@@ -15,6 +17,7 @@ const HTMLPlugins = Object.keys(entries).map(
       hash: true,
       chunks: [key],
       scriptLoading: "defer",
+      inject: "body",
     })
 );
 
@@ -47,7 +50,16 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-        use: ["css-loader", "less-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              plugins: [new LessImportPrefix(["@arco-design/web-react"])],
+            },
+          },
+        ],
       },
       {
         test: /\.ts$/,
@@ -63,6 +75,14 @@ module.exports = {
       chunks: [],
       scriptLoading: "defer",
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
+    }),
     ...HTMLPlugins,
   ],
+  optimization: {
+    moduleIds: "deterministic",
+    chunkIds: "deterministic",
+  },
 };
