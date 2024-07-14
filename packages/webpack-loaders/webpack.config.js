@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LessImportPrefix = require("./src/less/import-prefix");
+const ImportResolver = require("./src/resolver/import-resolver");
 
 const entries = {
   less: "./src/less/index.ts",
@@ -14,7 +15,6 @@ const HTMLPlugins = Object.keys(entries).map(
     new HtmlWebpackPlugin({
       filename: `${key}.html`,
       template: path.resolve("./public/index.html"),
-      hash: true,
       chunks: [key],
       scriptLoading: "defer",
       inject: "body",
@@ -31,7 +31,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: entries,
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "build"),
   },
   resolve: {
@@ -39,6 +39,7 @@ module.exports = {
     alias: {
       "@": path.join(__dirname, "./src"),
     },
+    plugins: [new ImportResolver()],
   },
   stats: "minimal",
   devServer: {
