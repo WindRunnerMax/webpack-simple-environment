@@ -10,6 +10,8 @@
     "@arco-design/web-react": "2.50.0"
   },
   "devDependencies": {
+    "babel-loader": "8.2.2",
+    "@babel/core": "7.12.3",
     "css-loader": "6.4.0",
     "html-webpack-plugin": "5.3.2",
     "less": "4.2.0",

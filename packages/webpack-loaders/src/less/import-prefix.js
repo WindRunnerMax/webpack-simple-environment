@@ -1,7 +1,4 @@
-// https://github.com/less/less-docs/blob/master/content/tools/plugins.md
-// https://github.com/less/less-docs/blob/master/content/features/plugins.md
-
-class LessImportPrefixPlugin {
+module.exports = class LessImportPrefixPlugin {
   constructor(prefixModules) {
     this.prefixModules = prefixModules || [];
     this.minVersion = [2, 7, 1];
@@ -16,14 +13,14 @@ class LessImportPrefixPlugin {
     const lines = source.split("\n");
     const next = lines.map(line => {
       const text = line.trim();
-      if (!text.startsWith("@import")) return text;
+      if (!text.startsWith("@import")) return line;
       const result = /@import ['"](.+)['"];?/.exec(text);
-      if (!result || !result[1]) return text;
+      if (!result || !result[1]) return line;
       const uri = result[1];
       for (const it of this.prefixModules) {
         if (uri.startsWith(it)) return `@import "~${uri}";`;
       }
-      return text;
+      return line;
     });
     return next.join("\n");
   }
@@ -31,6 +28,7 @@ class LessImportPrefixPlugin {
   install(less, pluginManager) {
     pluginManager.addPreProcessor({ process: this.process.bind(this) }, 3000);
   }
-}
+};
 
-module.exports = LessImportPrefixPlugin;
+// https://github.com/less/less-docs/blob/master/content/tools/plugins.md
+// https://github.com/less/less-docs/blob/master/content/features/plugins.md

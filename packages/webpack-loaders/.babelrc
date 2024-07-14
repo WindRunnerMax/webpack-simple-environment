@@ -1,0 +1,3 @@
+{
+  "plugins": ["./src/loader/babel-import.js"]
+}

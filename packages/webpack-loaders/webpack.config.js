@@ -59,11 +59,12 @@ module.exports = {
               plugins: [new LessImportPrefix(["@arco-design/web-react"])],
             },
           },
+          require.resolve("./src/loader/import-loader"),
         ],
       },
       {
         test: /\.ts$/,
-        loader: "ts-loader",
+        use: ["babel-loader", "ts-loader"],
         exclude: /node_modules/,
       },
     ],
