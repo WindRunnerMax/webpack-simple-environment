@@ -11,3 +11,6 @@ module.exports = function (source) {
   }
   return source;
 };
+
+// https://webpack.js.org/api/loaders
+// https://webpack.js.org/concepts/loaders

@@ -30,3 +30,6 @@ module.exports = class ImportResolver {
       });
   }
 };
+
+// https://webpack.js.org/configuration/resolve/#resolveplugins
+// https://github.com/webpack/enhanced-resolve?tab=readme-ov-file#plugins

@@ -118,5 +118,10 @@
 <td><a href="./packages/chrome-debugger">packages/chrome-debugger</a></td>
 </tr>
 
+<tr>
+<td><a href="">初探webpack之解析器resolver</a></td>
+<td><a href="./packages/webpack-resolver">packages/webpack-resolver</a></td>
+</tr>
+
 </tbody>
 </table>
