@@ -1,0 +1,33 @@
+{
+  "name": "fetch-sse",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev:client": "rspack serve --config ./rspack.config.ts",
+    "dev:server": "nodemon --watch server --ext ts --exec \"ts-node ./server/index.ts\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "laser-utils": "0.0.5-alpha.11",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@arco-design/web-react": "2.50.0"
+  },
+  "devDependencies": {
+    "@rspack/cli": "0.2.5",
+    "@rspack/plugin-html": "0.2.5",
+    "@types/node": "20.11.10",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "copy-webpack-plugin": "5",
+    "less": "4.2.0",
+    "less-loader": "12.1.0",
+    "nodemon": "3.0.1",
+    "sass-loader": "13.3.3"
+  }
+}

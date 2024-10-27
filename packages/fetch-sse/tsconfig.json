@@ -1,0 +1,4 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["./client/**/*", "./server/**/*", "./types/global.d.ts"]
+}
