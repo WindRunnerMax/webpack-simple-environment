@@ -21,7 +21,7 @@ export const transfer = async (
   const readable = response.body;
   if (!readable) return null;
 
-  req.on("close", () => {
+  req.socket.on("close", () => {
     console.log("[transfer] connection close");
     ctrl.abort();
   });

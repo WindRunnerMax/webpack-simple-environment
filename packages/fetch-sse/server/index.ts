@@ -1,6 +1,7 @@
 import http from "http";
 
 import { ping } from "./modules/ping";
+import { proxy } from "./modules/proxy";
 import { stream } from "./modules/stream";
 import { transfer } from "./modules/transfer";
 
@@ -14,6 +15,9 @@ http
     }
     if (req.url === "/transfer") {
       return transfer(req, res);
+    }
+    if (req.url === "/proxy") {
+      return proxy(req, res);
     }
   })
   .listen(8800, "127.0.0.1");

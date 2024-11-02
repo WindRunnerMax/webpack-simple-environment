@@ -17,7 +17,7 @@ export const ping = (req: http.IncomingMessage, res: http.ServerResponse<http.In
     res.write("data: " + new Date() + "\n\n");
   }, 1000);
 
-  req.on("close", () => {
+  req.socket.on("close", () => {
     clearInterval(interval);
   });
 };
