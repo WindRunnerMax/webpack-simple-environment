@@ -17,27 +17,28 @@ export const stream = (
   res: http.ServerResponse<http.IncomingMessage>
 ) => {
   res.writeHead(200, {
-    "Content-Type": "text/event-stream",
+    "Content-Type": "text/event-stream; charset=utf-8",
     "Cache-Control": "no-cache",
     "Connection": "keep-alive",
-    "Access-Control-Allow-Origin": "*",
   });
+
   res.write("event: connect\n");
   res.write("data: " + Date.now() + "\n\n");
 
   let start = 0;
   const interval = setInterval(() => {
-    const increment = Math.floor(Math.random() * 30);
-    start = start + increment;
+    const slice = Math.floor(Math.random() * 30) + 1;
+    start = start + slice;
     res.write("event: message\n");
     res.write("data: " + content.slice(0, start) + "\n\n");
     if (start >= content.length) {
+      clearInterval(interval);
       res.end();
     }
   }, 500);
 
   req.on("close", () => {
-    console.log("client connection close");
+    console.log("[stream] connection close");
     clearInterval(interval);
   });
 };
