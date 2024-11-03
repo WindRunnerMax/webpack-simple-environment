@@ -94,6 +94,20 @@ const config: Configuration = {
     chunkFilename: isDev ? "[name].chunk.js" : "[name].[contenthash].js",
     assetModuleFilename: isDev ? "[name].[ext]" : "[name].[contenthash].[ext]",
   },
+  devServer: {
+    // https://stackoverflow.com/questions/71783075/sse-doent-work-with-vue-cli-devserver-proxy
+    compress: false,
+    proxy: {
+      "/": {
+        target: "http://127.0.0.1:8800/",
+        changeOrigin: true,
+        // https://github.com/webpack/webpack-dev-server/issues/2769
+        onProxyReq: (proxyReq, req) => {
+          req.socket.on("close", () => proxyReq.destroy());
+        },
+      },
+    },
+  },
 };
 
 export default config;

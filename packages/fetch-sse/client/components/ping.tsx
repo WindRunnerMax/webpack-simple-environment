@@ -38,7 +38,7 @@ export const Ping: FC = () => {
 
   const onStart = () => {
     setTransmitting(true);
-    const source = new EventSource("http://127.0.0.1:8800/ping");
+    const source = new EventSource("/ping");
     source.onopen = onOpen;
     source.onerror = onError;
     source.addEventListener("connect", onConnect);

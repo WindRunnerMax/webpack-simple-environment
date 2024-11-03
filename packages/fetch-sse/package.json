@@ -7,7 +7,6 @@
   ],
   "scripts": {
     "dev:client": "rspack serve --config ./rspack.config.ts",
-    "build:server": "tsc -p ts.server.json && node ./dist/server/index.js",
     "dev:server": "nodemon --watch server --ext ts --exec \"ts-node ./server/index.ts\""
   },
   "keywords": [],

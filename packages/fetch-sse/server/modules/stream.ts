@@ -40,5 +40,6 @@ export const stream = (
   req.socket.on("close", () => {
     console.log("[stream] connection close");
     clearInterval(interval);
+    res.end();
   });
 };

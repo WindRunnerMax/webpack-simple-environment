@@ -24,6 +24,7 @@ export const transfer = async (
   req.socket.on("close", () => {
     console.log("[transfer] connection close");
     ctrl.abort();
+    res.end();
   });
 
   const parser = new StreamParser();

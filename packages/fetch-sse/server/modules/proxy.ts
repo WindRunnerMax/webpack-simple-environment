@@ -27,6 +27,7 @@ export const proxy = async (
 
   req.socket.on("close", () => {
     console.log("[proxy] connection close");
+    res.end();
     proxyReq.destroy();
   });
 };

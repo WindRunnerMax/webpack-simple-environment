@@ -18,6 +18,8 @@ export const ping = (req: http.IncomingMessage, res: http.ServerResponse<http.In
   }, 1000);
 
   req.socket.on("close", () => {
+    console.log("[ping] connection close");
     clearInterval(interval);
+    res.end();
   });
 };
