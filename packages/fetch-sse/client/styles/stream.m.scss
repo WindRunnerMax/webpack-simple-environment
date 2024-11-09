@@ -1,0 +1,29 @@
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.textarea {
+  border: 1px solid #aaa;
+  font-size: 14px;
+  height: 400px;
+  overflow: auto;
+  padding: 10px;
+  width: 600px;
+
+  &.painting > *:last-child:not(ol):not(ul),
+  &.painting > ol:last-child > li:last-child,
+  &.painting > ul:last-child > li:last-child {
+    &::after {
+      animation: blink 1s infinite;
+      background-color: #000;
+      content: '';
+      display: inline-block;
+      height: 1em;
+      margin-top: -2px;
+      vertical-align: middle;
+      width: 1px;
+    }
+  }
+}

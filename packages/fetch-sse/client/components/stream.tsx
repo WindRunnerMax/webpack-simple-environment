@@ -1,20 +1,22 @@
 import { Button, Space } from "@arco-design/web-react";
+import { cs, useMemoFn, useStateRef } from "laser-utils";
 import MarkdownIt from "markdown-it";
 import type { FC } from "react";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import type { Message } from "../../server/utils/steam-parser";
 import { StreamParser } from "../../server/utils/steam-parser";
-import styles from "../styles/ping.m.scss";
+import styles from "../styles/stream.m.scss";
 
 export const Stream: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const controller = useRef<AbortController | null>(null);
-  const [transmitting, setTransmitting] = useState(false);
+  const [painting, setPainting] = useState(false);
   const currentIndex = useRef(0);
   const currentDOMIndex = useRef(0);
   const isAutoScroll = useRef(true);
   const timer = useRef<NodeJS.Timeout | null>(null);
+  const [transmitting, setTransmitting, transmittingRef] = useStateRef(false);
 
   const append = (text: string) => {
     const el = ref.current;
@@ -35,8 +37,9 @@ export const Stream: FC = () => {
     isAutoScroll.current && el.scrollTo({ top: el.scrollHeight });
   };
 
-  const onMessage = (e: Message) => {
+  const onMessage = useMemoFn((e: Message) => {
     if (e.event !== "message") return null;
+    setPainting(true);
     const data = e.data;
     const text = data.replace(/\\n/g, "\n");
     const start = currentIndex.current;
@@ -49,11 +52,15 @@ export const Stream: FC = () => {
       if (end < len) {
         timer.current = setTimeout(process, delay);
       }
+      if (!transmittingRef.current && end >= len) {
+        setPainting(false);
+      }
     };
     setTimeout(process, delay);
-  };
+  });
 
   const onError = () => {
+    setPainting(false);
     setTransmitting(false);
     controller.current?.abort();
     timer.current && clearTimeout(timer.current);
@@ -68,21 +75,26 @@ export const Stream: FC = () => {
     try {
       const res = await fetch("/proxy", { method: "POST", signal: signal.signal });
       const body = res.body;
-      if (!body) return null;
+      if (!body) {
+        setTransmitting(false);
+        return null;
+      }
       const reader = body.getReader();
       const parser = new StreamParser();
       parser.onMessage = onMessage;
       let result: ReadableStreamReadResult<Uint8Array> | null = null;
       while ((result = await reader.read())) {
-        if (result.done) return null;
+        if (result.done) break;
         parser.onBinary(result.value);
       }
+      setTransmitting(false);
     } catch (error) {
       onError();
     }
   };
 
   const onClose = () => {
+    setPainting(false);
     setTransmitting(false);
     if (controller.current) {
       controller.current.abort();
@@ -108,7 +120,7 @@ export const Stream: FC = () => {
 
   return (
     <Fragment>
-      <div className={styles.textarea} ref={ref}></div>
+      <div className={cs(styles.textarea, painting && styles.painting)} ref={ref}></div>
       <Space size="medium">
         <Button onClick={onStart} type="primary" disabled={transmitting}>
           启动

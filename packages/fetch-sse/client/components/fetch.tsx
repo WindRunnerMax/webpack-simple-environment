@@ -4,7 +4,7 @@ import { Fragment, useRef, useState } from "react";
 
 import type { Message } from "../../server/utils/steam-parser";
 import { StreamParser } from "../../server/utils/steam-parser";
-import styles from "../styles/ping.m.scss";
+import styles from "../styles/fetch.m.scss";
 
 export const Fetch: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
