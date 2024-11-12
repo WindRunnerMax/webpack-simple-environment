@@ -1,4 +1,5 @@
-import http from "http";
+import http from "node:http";
+import { URL } from "node:url";
 
 export const proxy = async (
   req: http.IncomingMessage,

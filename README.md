@@ -123,5 +123,10 @@
 <td><a href="./packages/webpack-resolver">packages/webpack-resolver</a></td>
 </tr>
 
+<tr>
+<td><a href="https://juejin.cn/post/7435708914433966117">基于fetch的SSE方案</a></td>
+<td><a href="./packages/fetch-sse">packages/fetch-sse</a></td>
+</tr>
+
 </tbody>
 </table>

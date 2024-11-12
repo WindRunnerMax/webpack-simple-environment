@@ -23,6 +23,14 @@ export class StreamParser {
   }
 
   private onLine(bytes: Uint8Array) {
+    if (bytes.length === 0) {
+      if (this.onMessage && this.message.event) {
+        this.message.data = this.message.data || "";
+        this.onMessage(this.message as Message);
+      }
+      this.message = {};
+      return;
+    }
     const decoder = new TextDecoder();
     const line = decoder.decode(bytes);
     const [field, ...rest] = line.split(":");
@@ -37,8 +45,6 @@ export class StreamParser {
       case "data":
         this.message.event = this.message.event || "message";
         this.message.data = value;
-        this.onMessage && this.onMessage(this.message as Message);
-        this.message = {};
         break;
       default:
         break;

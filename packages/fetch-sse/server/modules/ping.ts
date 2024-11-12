@@ -8,6 +8,7 @@ export const ping = (req: http.IncomingMessage, res: http.ServerResponse<http.In
   });
 
   res.write("retry: 10000\n");
+  res.write("id: -1\n");
   res.write("event: connect\n");
   res.write("data: " + new Date() + "\n\n");
 
