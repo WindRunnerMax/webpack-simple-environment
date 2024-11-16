@@ -1,8 +1,5 @@
-export type Message = {
-  event: string;
-  data: string;
-  id?: string;
-};
+export const DEFAULT_EVENT = "message";
+export type Message = { event: string; data: string; id?: string };
 
 export class StreamParser {
   private buffer: Uint8Array;
@@ -24,8 +21,8 @@ export class StreamParser {
 
   private onLine(bytes: Uint8Array) {
     if (bytes.length === 0) {
-      if (this.onMessage && this.message.event) {
-        this.message.data = this.message.data || "";
+      if (this.onMessage && this.message.data) {
+        this.message.event = this.message.event || DEFAULT_EVENT;
         this.onMessage(this.message as Message);
       }
       this.message = {};
@@ -43,7 +40,7 @@ export class StreamParser {
         this.message.event = value;
         break;
       case "data":
-        this.message.event = this.message.event || "message";
+        this.message.event = this.message.event || DEFAULT_EVENT;
         this.message.data = value;
         break;
       default:
