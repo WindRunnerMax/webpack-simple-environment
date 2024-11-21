@@ -213,6 +213,55 @@ importers:
         specifier: 13.3.3
         version: 13.3.3(sass@1.52.3)(webpack@5.56.1)
 
+  packages/focus-fighting:
+    dependencies:
+      '@arco-design/web-react':
+        specifier: 2.60.3
+        version: 2.60.3(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
+      ahooks:
+        specifier: 3.7.8
+        version: 3.7.8(react@17.0.2)
+      react:
+        specifier: 17.0.2
+        version: 17.0.2
+      react-dom:
+        specifier: 17.0.2
+        version: 17.0.2(react@17.0.2)
+      react-focus-lock@2.13.2:
+        specifier: npm:react-focus-lock@2.13.2
+        version: /react-focus-lock@2.13.2(@types/react@17.0.2)(react@17.0.2)
+      react-focus-lock@2.9.1:
+        specifier: npm:react-focus-lock@2.9.1
+        version: /react-focus-lock@2.9.1(@types/react@17.0.2)(react@17.0.2)
+    devDependencies:
+      '@rspack/cli':
+        specifier: 0.2.5
+        version: 0.2.5(react-refresh@0.14.0)(webpack@5.56.1)
+      '@rspack/plugin-html':
+        specifier: 0.2.5
+        version: 0.2.5(@rspack/core@0.2.5)
+      '@types/node':
+        specifier: 20.11.10
+        version: 20.11.10
+      '@types/react':
+        specifier: 17.0.2
+        version: 17.0.2
+      '@types/react-dom':
+        specifier: 17.0.2
+        version: 17.0.2
+      copy-webpack-plugin:
+        specifier: '5'
+        version: 5.1.2(webpack@5.56.1)
+      less:
+        specifier: 4.2.0
+        version: 4.2.0
+      less-loader:
+        specifier: 12.1.0
+        version: 12.1.0(less@4.2.0)(webpack@5.56.1)
+      sass-loader:
+        specifier: 13.3.3
+        version: 13.3.3(sass@1.52.3)(webpack@5.56.1)
+
   packages/markdown-it-multi-table:
     dependencies:
       argparse:
@@ -12593,8 +12642,22 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.8
 
+  /focus-lock@0.11.6:
+    resolution: {integrity: sha512-KSuV3ur4gf2KqMNoZx3nXNVhqCkn42GuTYCX4tXPEwf0MjpFQmNMiN6m7dXaUXgIoivL6/65agoUMg4RLS0Vbg==}
+    engines: {node: '>=10'}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
   /focus-lock@1.0.0:
     resolution: {integrity: sha512-a8Ge6cdKh9za/GZR/qtigTAk7SrGore56EFcoMshClsh7FLk1zwszc/ltuMfKhx56qeuyL/jWQ4J4axou0iJ9w==}
+    engines: {node: '>=10'}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /focus-lock@1.3.5:
+    resolution: {integrity: sha512-QFaHbhv9WPUeLYBDe/PAuLKJ4Dd9OPvKs9xZBr3yLXnUrDNaVXKu2baDBXe3naPY30hgHYSsf2JW4jzas2mDEQ==}
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.6.2
@@ -18939,6 +19002,44 @@ packages:
     resolution: {integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==}
     dev: false
 
+  /react-focus-lock@2.13.2(@types/react@17.0.2)(react@17.0.2):
+    resolution: {integrity: sha512-T/7bsofxYqnod2xadvuwjGKHOoL5GH7/EIPI5UyEvaU/c2CcphvGI371opFtuY/SYdbMsNiuF4HsHQ50nA/TKQ==}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.5
+      '@types/react': 17.0.2
+      focus-lock: 1.3.5
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-clientside-effect: 1.2.6(react@17.0.2)
+      use-callback-ref: 1.3.2(@types/react@17.0.2)(react@17.0.2)
+      use-sidecar: 1.1.2(@types/react@17.0.2)(react@17.0.2)
+    dev: false
+
+  /react-focus-lock@2.9.1(@types/react@17.0.2)(react@17.0.2):
+    resolution: {integrity: sha512-pSWOQrUmiKLkffPO6BpMXN7SNKXMsuOakl652IBuALAu1esk+IcpJyM+ALcYzPTTFz1rD0R54aB9A4HuP5t1Wg==}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.5
+      '@types/react': 17.0.2
+      focus-lock: 0.11.6
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-clientside-effect: 1.2.6(react@17.0.2)
+      use-callback-ref: 1.3.1(@types/react@17.0.2)(react@17.0.2)
+      use-sidecar: 1.1.2(@types/react@17.0.2)(react@17.0.2)
+    dev: false
+
   /react-focus-lock@2.9.6(@types/react@17.0.1)(react@17.0.1):
     resolution: {integrity: sha512-B7gYnCjHNrNYwY2juS71dHbf0+UpXXojt02svxybj8N5bxceAkzPChKEncHuratjUHkIFNCn06k2qj1DRlzTug==}
     peerDependencies:
@@ -22062,6 +22163,21 @@ packages:
 
   /use-callback-ref@1.3.1(@types/react@17.0.2)(react@17.0.2):
     resolution: {integrity: sha512-Lg4Vx1XZQauB42Hw3kK7JM6yjVjgFmFC5/Ab797s79aARomD2nEErc4mCgM8EZrARLmmbWpi5DGCadmK50DcAQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 17.0.2
+      react: 17.0.2
+      tslib: 2.6.2
+    dev: false
+
+  /use-callback-ref@1.3.2(@types/react@17.0.2)(react@17.0.2):
+    resolution: {integrity: sha512-elOQwe6Q8gqZgDA8mrh44qRTQqpIHDcZ3hXTLjBe1i4ph8XpNJnO+aQf3NaG+lriLopI4HMx9VjQLfPQ6vhnoA==}
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
