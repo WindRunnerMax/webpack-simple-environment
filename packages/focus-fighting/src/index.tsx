@@ -1,27 +1,31 @@
-import React from "react";
+import "./styles/index.scss";
+
 import ReactDOM from "react-dom";
 
 import { IframeV9, IframeV13, IframeWar } from "./modules/iframe-war";
+import { Trap } from "./modules/trap";
 
 const type = new URLSearchParams(location.search).get("type");
-let component: JSX.Element = (
-  <div>
-    <a href="/?type=iframe-war">iframe-war</a>
-  </div>
-);
 
-switch (type) {
-  case "iframe-war":
-    component = <IframeWar />;
-    break;
-  case "iframe-cross-v9":
-    component = <IframeV9 />;
-    break;
-  case "iframe-cross-v13":
-    component = <IframeV13 />;
-    break;
-  default:
-    break;
-}
+const selectComponent = () => {
+  switch (type) {
+    case "trap":
+      return <Trap />;
+    case "iframe-war":
+      return <IframeWar />;
+    case "iframe-cross-v9":
+      return <IframeV9 />;
+    case "iframe-cross-v13":
+      return <IframeV13 />;
+    default:
+      break;
+  }
+  return (
+    <div className="index-summary">
+      <a href="/?type=trap">trap</a>
+      <a href="/?type=iframe-war">iframe-war</a>
+    </div>
+  );
+};
 
-ReactDOM.render(component, document.getElementById("root"));
+ReactDOM.render(selectComponent(), document.getElementById("root"));
