@@ -2,7 +2,12 @@ import "./styles/index.scss";
 
 import ReactDOM from "react-dom";
 
+import { AsyncFighting } from "./modules/async-fighting";
+import { AutoDegrade } from "./modules/auto-degrade";
+import { BlurSource } from "./modules/blur-source";
+import { FightingCheck } from "./modules/fighting-check";
 import { FocusTrap } from "./modules/focus-trap";
+import { IframeFree } from "./modules/iframe-free";
 import { IframeV9, IframeV13, IframeWar } from "./modules/iframe-war";
 import { InputFocus } from "./modules/input-focus";
 import { InputFocusFree } from "./modules/input-focus-free";
@@ -29,6 +34,16 @@ const selectComponent = () => {
       return <WorkspaceWar />;
     case "multi-lock-tools":
       return <MultiLockTools />;
+    case "auto-degrade":
+      return <AutoDegrade />;
+    case "async-fighting":
+      return <AsyncFighting />;
+    case "fighting-check":
+      return <FightingCheck />;
+    case "blur-source":
+      return <BlurSource />;
+    case "iframe-free":
+      return <IframeFree />;
     case "iframe-war":
       return <IframeWar />;
     case "iframe-cross-v9":
@@ -47,6 +62,11 @@ const selectComponent = () => {
       <a href="/?type=input-focus-free">input-focus-free</a>
       <a href="/?type=workspace-war">workspace-war</a>
       <a href="/?type=multi-lock-tools">multi-lock-tools</a>
+      <a href="/?type=auto-degrade">auto-degrade</a>
+      <a href="/?type=async-fighting">async-fighting</a>
+      <a href="/?type=fighting-check">fighting-check</a>
+      <a href="/?type=blur-source">blur-source</a>
+      <a href="/?type=iframe-free">iframe-free</a>
       <a href="/?type=iframe-war">iframe-war</a>
     </div>
   );
