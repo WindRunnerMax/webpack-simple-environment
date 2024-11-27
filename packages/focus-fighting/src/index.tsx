@@ -20,7 +20,7 @@ const type = new URLSearchParams(location.search).get("type");
 
 const selectComponent = () => {
   switch (type) {
-    case "trap":
+    case "focus-trap":
       return <FocusTrap />;
     case "multi-lock":
       return <MultiLock />;
@@ -55,7 +55,7 @@ const selectComponent = () => {
   }
   return (
     <div className="index-summary">
-      <a href="/?type=trap">trap</a>
+      <a href="/?type=focus-trap">focus-trap</a>
       <a href="/?type=multi-lock">multi-lock</a>
       <a href="/?type=input-focus">input-focus</a>
       <a href="/?type=multi-lock-free">multi-lock-free</a>

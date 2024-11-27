@@ -14,13 +14,15 @@ export const FightingCheck: FC = () => {
         execution = 0;
         lastRecord = now;
       }
-      if (execution++ >= 4) {
+      if (execution++ >= 6) {
         console.error("Callback Exec Limit");
         e.stopPropagation();
       }
     };
+    document.addEventListener("focusin", cb, true);
     document.addEventListener("focusout", cb, true);
     return () => {
+      document.removeEventListener("focusin", cb, true);
       document.removeEventListener("focusout", cb, true);
     };
   }, []);
