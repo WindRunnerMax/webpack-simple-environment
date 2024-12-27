@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const isDev = process.env.NODE_ENV === "development";
 
 /**
- * @type {import('@rspack/cli').Configuration}
+ * @type {import("@rspack/cli").Configuration}
  */
 module.exports = {
   context: __dirname,
@@ -26,7 +26,6 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "mono-utils": path.resolve(__dirname, "../utils/src"),
     },
   },
   builtins: {

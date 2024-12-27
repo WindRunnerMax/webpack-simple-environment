@@ -1,13 +1,16 @@
-const path = require("path");
-const { default: HtmlPlugin } = require("@rspack/plugin-html");
-const CopyPlugin = require("copy-webpack-plugin");
+/// <reference types="./script/global.d.ts" />
+import type { Configuration } from "@rspack/cli";
+import { default as HtmlPlugin } from "@rspack/plugin-html";
+import CopyPlugin from "copy-webpack-plugin";
+import path from "path";
 
 const isDev = process.env.NODE_ENV === "development";
 
 /**
  * @type {import("@rspack/cli").Configuration}
+ * @link https://www.rspack.dev/
  */
-module.exports = {
+const config: Configuration = {
   context: __dirname,
   entry: {
     index: "./src/index.tsx",
@@ -23,11 +26,6 @@ module.exports = {
       template: "./public/index.html",
     }),
   ],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
   builtins: {
     define: {
       "__DEV__": JSON.stringify(isDev),
@@ -48,17 +46,22 @@ module.exports = {
     ],
   },
   module: {
+    // https://www.rspack.dev/zh/config/module#rule
     rules: [
       { test: /\.svg$/, type: "asset" },
       {
-        test: /^(?!.*\.module\.scss$)(?!.*\.m\.scss$).*\.scss$/,
-        use: [{ loader: "sass-loader" }],
-        type: "css",
-      },
-      {
-        test: /\.(m|module).scss$/,
-        use: [{ loader: "sass-loader" }],
-        type: "css/module",
+        test: /.scss$/,
+        oneOf: [
+          {
+            resource: /(module|m)\.scss$/,
+            use: "sass-loader",
+            type: "css/module",
+          },
+          {
+            use: "sass-loader",
+            type: "css",
+          },
+        ],
       },
       {
         test: /\.less$/,
@@ -81,6 +84,7 @@ module.exports = {
   target: isDev ? undefined : "es5",
   devtool: isDev ? "source-map" : false,
   output: {
+    clean: true,
     chunkLoading: "jsonp",
     chunkFormat: "array-push",
     publicPath: isDev ? "" : "./",
@@ -91,4 +95,4 @@ module.exports = {
   },
 };
 
-// https://www.rspack.dev/
+export default config;
