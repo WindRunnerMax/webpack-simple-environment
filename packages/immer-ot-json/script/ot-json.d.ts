@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// https://github.com/ottypes/docs
 // https://github.com/ottypes/json0
 // https://github.com/ottypes/json0/blob/master/lib/json0.js
-// https://github.com/ottypes/json0/blob/master/lib/bootstrapTransform.js
 declare module "ot-json0" {
   export type Path = Array<string | number>;
 
@@ -65,7 +65,7 @@ declare module "ot-json0" {
        * Helper for incrementally applying an operation to a snapshot. Calls yield
        * after each op component has been applied.
        */
-      incrementalApply: (snapshot: any, op: Op[], yield: (snapshot: any) => void) => void;
+      incrementalApply: (snapshot: Snapshot, op: Op[], yield: (snapshot: any) => void) => void;
       invertComponent: (op: Op) => Op;
       normalize: (op: Op[]) => Op[];
       /** Checks if two paths, p1 and p2 match. */
@@ -79,12 +79,7 @@ declare module "ot-json0" {
       /** Helper to break an operation up into a bunch of small ops. */
       shatter: (ops: Op[]) => [op: Op][];
       /** transform c so it applies to a document with otherC applied. */
-      transformComponent: <T extends any[]>(
-        dest: T,
-        c: Op,
-        otherC: Op,
-        type: "left" | "string"
-      ) => T;
+      transformComponent: (dest: Op[], c: Op, otherC: Op, type: "left" | "string") => Op[];
       transformX: (leftOp: Op, rightOp: Op) => [leftOp: Op, newRightOp: Op];
     };
   };
