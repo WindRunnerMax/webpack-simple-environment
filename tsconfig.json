@@ -20,12 +20,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "paths": {},
+    "paths": {}
   },
-  "include": [
-    "packages/*/src/**/*.ts",
-    "packages/*/src/**/*.tsx",
-  ],
+  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx"],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"
