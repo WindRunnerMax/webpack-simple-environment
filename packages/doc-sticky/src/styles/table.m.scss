@@ -1,0 +1,34 @@
+@import 'laser-utils/dist/style/vars';
+
+.container {
+  margin-bottom: 10px;
+}
+
+.tableHeaderContainer {
+  background-color: #eee;
+  position: sticky;
+  top: 0;
+}
+
+.tableContainer {
+  @include no-scrollbar;
+
+  overflow: auto;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+
+  tr {
+    height: 60px;
+  }
+}
+
+.scroll {
+  @include min-scrollbar;
+
+  bottom: 5px;
+  overflow: auto;
+  position: sticky;
+}

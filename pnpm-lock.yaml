@@ -155,6 +155,46 @@ importers:
         specifier: 6.0.0
         version: 6.0.0(webpack@5.56.1)
 
+  packages/doc-sticky:
+    dependencies:
+      '@arco-design/web-react':
+        specifier: 2.60.3
+        version: 2.60.3(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
+      laser-utils:
+        specifier: 0.0.5-alpha.18
+        version: 0.0.5-alpha.18
+      react:
+        specifier: 17.0.2
+        version: 17.0.2
+      react-dom:
+        specifier: 17.0.2
+        version: 17.0.2(react@17.0.2)
+    devDependencies:
+      '@rspack/cli':
+        specifier: 0.2.5
+        version: 0.2.5(react-refresh@0.14.0)(webpack@5.56.1)
+      '@rspack/plugin-html':
+        specifier: 0.2.5
+        version: 0.2.5(@rspack/core@0.2.5)
+      '@types/react':
+        specifier: 17.0.2
+        version: 17.0.2
+      '@types/react-dom':
+        specifier: 17.0.2
+        version: 17.0.2
+      copy-webpack-plugin:
+        specifier: '5'
+        version: 5.1.2(webpack@5.56.1)
+      less:
+        specifier: 4.2.0
+        version: 4.2.0
+      less-loader:
+        specifier: 12.1.0
+        version: 12.1.0(less@4.2.0)(webpack@5.56.1)
+      sass-loader:
+        specifier: 13.3.3
+        version: 13.3.3(sass@1.52.3)(webpack@5.56.1)
+
   packages/fetch-sse:
     dependencies:
       '@arco-design/web-react':
@@ -268,14 +308,11 @@ importers:
         specifier: 13.3.3
         version: 13.3.3(sass@1.52.3)(webpack@5.56.1)
 
-  packages/immer-state:
+  packages/immer-ot-json:
     dependencies:
       '@arco-design/web-react':
         specifier: 2.60.3
         version: 2.60.3(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
-      ahooks:
-        specifier: 3.7.8
-        version: 3.7.8(react@17.0.2)
       immer:
         specifier: 10.1.1
         version: 10.1.1
@@ -307,9 +344,6 @@ importers:
       '@types/jest':
         specifier: 29.4.0
         version: 29.4.0
-      '@types/node':
-        specifier: 20.11.10
-        version: 20.11.10
       '@types/react':
         specifier: 17.0.2
         version: 17.0.2
@@ -15972,6 +16006,10 @@ packages:
 
   /laser-utils@0.0.5-alpha.11:
     resolution: {integrity: sha512-4gcf7dr5ktfrI2WLnblSNmVto/Yk2Xbmj8sq/jsFG3XZRqgLTX4cydZl3Gpwm7lwK38ppQB5RgOpgW3Tdfhf6w==}
+    dev: false
+
+  /laser-utils@0.0.5-alpha.18:
+    resolution: {integrity: sha512-Byp7Bi8s7OjhTb4JR/wYqa65rjziHTGShQnTC9OxUxs2Ok//NQojeKxzn74w8SWMY1+z5nV3QlZcyufDk1K0Kw==}
     dev: false
 
   /last-call-webpack-plugin@3.0.0:
