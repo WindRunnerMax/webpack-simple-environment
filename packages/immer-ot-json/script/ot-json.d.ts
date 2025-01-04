@@ -48,7 +48,7 @@ declare module "ot-json0" {
       uri: string;
       name: string;
       invert: (op: Op[]) => Op[];
-      apply: (json: Snapshot, op: Op[]) => Snapshot;
+      apply: <T extends Snapshot>(json: T, op: Op[]) => T;
       compose: (op1: Op[], op2: Op[]) => Op[];
       /** Transforms op with specified type ('left' or 'right') by otherOp. */
       transform: (op: Op[], otherOp: Op[], side: "left" | "right") => Op[];
@@ -79,7 +79,7 @@ declare module "ot-json0" {
       /** Helper to break an operation up into a bunch of small ops. */
       shatter: (ops: Op[]) => [op: Op][];
       /** transform c so it applies to a document with otherC applied. */
-      transformComponent: (dest: Op[], c: Op, otherC: Op, type: "left" | "string") => Op[];
+      transformComponent: (dest: Op[], c: Op, otherC: Op, type: "left" | "right") => Op[];
       transformX: (leftOp: Op, rightOp: Op) => [leftOp: Op, newRightOp: Op];
     };
   };
