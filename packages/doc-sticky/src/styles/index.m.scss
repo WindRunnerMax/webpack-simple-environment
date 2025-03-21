@@ -9,6 +9,9 @@
 
   .doc {
     box-sizing: border-box;
+    // 这里必须要是固定的宽度值 而不能是 flex: 1 0;
+    // 主要是 table 在 fixed 情况下会将容器撑起
+    // 因此容器必须要有固定的宽度值 以避免撑起容器导致越界
     width: calc(100% - 300px);
   }
 
