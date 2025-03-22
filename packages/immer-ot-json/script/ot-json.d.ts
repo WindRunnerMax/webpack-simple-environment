@@ -4,6 +4,7 @@
 // https://github.com/ottypes/json0
 // https://github.com/ottypes/json0/blob/master/lib/json0.js
 declare module "ot-json0" {
+  export type Ops = Op[];
   export type Path = Array<string | number>;
 
   export type Snapshot =

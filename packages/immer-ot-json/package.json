@@ -23,6 +23,7 @@
   "dependencies": {
     "@arco-design/web-react": "2.60.3",
     "immer": "10.1.1",
+    "laser-utils": "0.0.5-alpha.26",
     "ot-json0": "1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
