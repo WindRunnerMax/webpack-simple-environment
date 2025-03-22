@@ -1,3 +1,4 @@
+import { createDraft, finishDraft } from "immer";
 import { getId } from "laser-utils";
 import type { Op } from "ot-json0";
 import { type } from "ot-json0";
@@ -21,7 +22,9 @@ export class State {
       changes: ops,
       range: this.editor.selection.get(),
     });
-    const nextState = type.apply(this.data, ops);
+    const draft = createDraft(this.data);
+    type.apply(draft, ops);
+    const nextState = finishDraft(draft);
     this.data = nextState;
     this.editor.event.emit(EVENTS.CONTENT_CHANGE, {
       id,
