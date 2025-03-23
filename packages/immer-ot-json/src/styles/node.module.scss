@@ -1,6 +1,12 @@
 .node {
+  align-items: center;
+  border-color: #eee;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
   display: flex;
   height: 100px;
+  justify-content: center;
   position: relative;
   width: 100px;
 }
