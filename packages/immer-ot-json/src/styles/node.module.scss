@@ -8,5 +8,16 @@
   height: 100px;
   justify-content: center;
   position: relative;
+  user-select: none;
   width: 100px;
+
+  .select {
+    background-color: rgba(var(--arcoblue-6), 0.9);
+    border-radius: 7px;
+    height: 7px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 7px;
+  }
 }

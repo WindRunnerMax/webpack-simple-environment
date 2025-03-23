@@ -9,7 +9,7 @@ export class Selection {
   public constructor(private editor: Editor) {}
 
   public set(range: Range | null) {
-    if (this.previous === range) {
+    if (this.current === range) {
       return void 0;
     }
     const previous = this.previous;

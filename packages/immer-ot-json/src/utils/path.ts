@@ -1,7 +1,7 @@
 import { isNil } from "laser-utils";
 
 import { Editor } from "../editor";
-import type { Node } from "../types/state";
+import type { Node, Snapshot } from "../types/state";
 import { NODE_TO_INDEX, NODE_TO_PARENT } from "./weak-map";
 
 export const findPath = (node: Node | Editor) => {
@@ -24,4 +24,19 @@ export const findPath = (node: Node | Editor) => {
     child = parent as Node;
   }
   throw new Error("Unable To Find Path");
+};
+
+export const getNode = (snapshot: Snapshot, path: number[]): Node | null => {
+  let parent: Node[] = snapshot;
+  for (let i = 0; i < path.length - 1; i++) {
+    const index = path[i];
+    const node = parent[index];
+    const children = node && node.children;
+    if (!node || !children) {
+      return null;
+    }
+    parent = children;
+  }
+  const lastIndex = path[path.length - 1];
+  return parent[lastIndex] || null;
 };

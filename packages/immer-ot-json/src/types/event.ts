@@ -13,6 +13,7 @@ export type WillApplyEvent = {
   id: string;
   changes: Op[];
   range: Range | null;
+  source?: string;
 };
 
 export type ContentChangeEvent = {
@@ -20,6 +21,7 @@ export type ContentChangeEvent = {
   changes: Op[];
   previous: Snapshot;
   current: Snapshot;
+  source?: string;
 };
 
 export type SelectionChangeEvent = {
