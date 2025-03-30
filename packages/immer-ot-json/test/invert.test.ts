@@ -15,8 +15,8 @@ describe("invert", () => {
   });
 
   it("simple retain", () => {
-    const op: Op[] = [{ p: [1, "key"], oi: "value" }];
+    const op: Op[] = [{ p: [1, "key"], oi: "value2", od: "value1" }];
     const inverted = type.invert(op);
-    expect(inverted).toEqual([{ p: [1, "key"], od: "value" }]);
+    expect(inverted).toEqual([{ p: [1, "key"], od: "value2", oi: "value1" }]);
   });
 });

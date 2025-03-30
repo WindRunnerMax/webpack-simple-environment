@@ -117,7 +117,33 @@ describe("batch transform", () => {
     expect(copied[3]).toEqual(undefined);
   });
 
-  it.only("transform ref", () => {
+  it("transform compose with", () => {
+    const ops: Op[] = [
+      { p: ["a", "b", 1], ld: 1 },
+      { p: ["a", "b", 3], ld: 3 },
+      { p: ["a", "b", 2], ld: 2 },
+      { p: ["a", "b", 3], ld: 3 },
+    ];
+    const composeWith = (base: Op[], ops: Op[]) => {
+      const waiting: Op[] = [];
+      for (const opa of ops) {
+        let nextOp = opa;
+        for (const opb of base) {
+          nextOp = type.transformComponent([], nextOp, opb, "left")[0];
+          if (!nextOp) break;
+        }
+        nextOp && waiting.push(nextOp);
+      }
+      return base.concat(waiting.filter(Boolean));
+    };
+    const copied = ops.reduce((acc, op) => composeWith(acc, [op]), [] as Op[]);
+    expect(copied[0]).toEqual({ p: ["a", "b", 1], ld: 1 });
+    expect(copied[1]).toEqual({ p: ["a", "b", 2], ld: 3 });
+    expect(copied[2]).toEqual({ p: ["a", "b", 1], ld: 2 });
+    expect(copied[3]).toEqual(undefined);
+  });
+
+  it("transform ref", () => {
     const baseState = {
       a: {
         b: [0, 1, 2, 3, 4, 5, 6] as number[],

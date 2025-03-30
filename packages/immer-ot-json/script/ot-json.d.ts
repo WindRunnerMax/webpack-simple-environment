@@ -81,7 +81,7 @@ declare module "ot-json0" {
       shatter: (ops: Op[]) => [op: Op][];
       /** transform c so it applies to a document with otherC applied. */
       transformComponent: (dest: Op[], c: Op, otherC: Op, type: "left" | "right") => Op[];
-      transformX: (leftOp: Op, rightOp: Op) => [leftOp: Op, newRightOp: Op];
+      transformX: (leftOp: Op[], rightOp: Op[]) => [leftOp: Op[], newRightOp: Op[]];
     };
   };
 

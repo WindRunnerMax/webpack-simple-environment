@@ -38,5 +38,5 @@ export const getNode = (snapshot: Snapshot, path: number[]): Node | null => {
     parent = children;
   }
   const lastIndex = path[path.length - 1];
-  return parent[lastIndex] || null;
+  return isNil(parent[lastIndex]) ? null : parent[lastIndex];
 };
