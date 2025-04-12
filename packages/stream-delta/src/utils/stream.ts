@@ -9,7 +9,7 @@ export const getReadableMarkdown = () => {
       const interval = setInterval(() => {
         const slice = Math.floor(Math.random() * 30) + 1;
         const end = start + slice;
-        const fragment = content.slice(start, end).replace(/\n/g, " \\n");
+        const fragment = content.slice(start, end).replace(/\n/g, "\\n");
         controller.enqueue(fragment);
         start = end;
         if (start >= content.length) {
