@@ -1,16 +1,19 @@
 import { Delta } from "@block-kit/delta";
 
+import { DeltaComposer } from "./modules/delta-composer";
 import { MdComposer } from "./modules/md-composer";
 import { getReadableMarkdown } from "./utils/stream";
 
-const delta = new Delta().insertEOL();
+let delta = new Delta().insertEOL();
 const readable = getReadableMarkdown();
 const reader = readable.getReader();
-const md = new MdComposer();
+const ds = new DeltaComposer();
+const ms = new MdComposer(ds);
 
 const reconcile = (text: string) => {
-  md.append(text);
-  delta.insert(text);
+  const diff = ms.append(text);
+  delta = delta.compose(diff);
+  console.log(JSON.stringify(diff.ops));
 };
 
 const start = async () => {

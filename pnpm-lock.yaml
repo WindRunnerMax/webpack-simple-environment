@@ -780,6 +780,19 @@ importers:
       mdast-util-gfm:
         specifier: ^3.1.0
         version: 3.1.0
+    devDependencies:
+      '@types/jest':
+        specifier: 29.4.0
+        version: 29.4.0
+      babel-jest:
+        specifier: 29.4.1
+        version: 29.4.1(@babel/core@7.20.12)
+      jest:
+        specifier: 29.4.1
+        version: 29.4.1(@types/node@20.11.10)(ts-node@10.9.2)
+      ts-jest:
+        specifier: 29.1.2
+        version: 29.1.2(@babel/core@7.20.12)(babel-jest@29.4.1)(jest@29.4.1)(typescript@5.3.2)
 
   packages/virtual-list-dynamic-scroll:
     dependencies:
