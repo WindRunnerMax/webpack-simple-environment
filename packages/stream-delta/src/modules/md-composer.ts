@@ -23,7 +23,7 @@ export class MdComposer {
   /**
    * 追加内容
    */
-  public append(text: string) {
+  public compose(text: string) {
     this.content = this.content + text;
     return this.parse();
   }
@@ -34,6 +34,9 @@ export class MdComposer {
   public parse() {
     const tree = marked.lexer(this.content);
     const delta = new Delta().retain(this.ds.archivedIndex);
+    // 这里的指针需要合并已经归档的长度
+    // 因为 delta 首个值是 retain, 这里同样需要对齐其长度表达
+    let archiveLength = this.ds.archivedIndex;
     // 只迭代 root 的首层子节点
     for (let i = 0; i < tree.length; i++) {
       const prev = tree[i - 1];
@@ -42,10 +45,15 @@ export class MdComposer {
       // 此外诸如表格等节点可以正则匹配来避免过早归档
       if (prev && child) {
         this.archive(prev);
-        this.ds.archive();
+        archiveLength = archiveLength + this.ds.archive();
+        const deltaLength = delta.length();
+        // 若归档长度大于当前 delta 长度，则需要移动指针
+        if (archiveLength - deltaLength > 0) {
+          delta.ops.push({ retain: archiveLength - deltaLength });
+        }
       }
       const section = parseLexerToken(child);
-      const diff = this.ds.append(section);
+      const diff = this.ds.compose(section);
       delta.ops.push(...diff.ops);
     }
     return delta.chop();

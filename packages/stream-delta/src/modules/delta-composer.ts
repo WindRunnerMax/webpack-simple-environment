@@ -15,23 +15,28 @@ export class DeltaComposer {
    * 追加 delta
    * - 返回变更的差异
    */
-  public append(delta: Delta) {
+  public compose(delta: Delta) {
+    const copied = new Delta(cloneOps(delta.ops));
     if (!this.current) {
+      this.current = copied;
       return delta;
     }
     const diff = this.current.diff(delta);
-    this.current = new Delta(cloneOps(delta.ops));
+    this.current = copied;
     return diff;
   }
 
   /**
    * 归档部分内容
+   * - 返回 archived 增量长度
    */
   public archive() {
     if (this.current) {
       const len = this.current.length();
       this.archivedIndex = this.archivedIndex + len;
+      this.current = null;
+      return len;
     }
-    this.current = null;
+    return 0;
   }
 }
