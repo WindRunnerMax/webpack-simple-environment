@@ -3,6 +3,7 @@ import type { O } from "laser-utils/dist/es/types";
 import type { Token } from "marked";
 import { marked } from "marked";
 
+import { getDeltaPointerPosition } from "../utils/delta";
 import { parseLexerToken } from "../utils/token";
 import type { DeltaComposer } from "./delta-composer";
 
@@ -15,7 +16,7 @@ export class MdComposer {
   /** 索引幂等的记录 */
   public indexIds: O.Map<string[]>;
 
-  public constructor(protected ds: DeltaComposer) {
+  public constructor(protected dc: DeltaComposer) {
     this.content = "";
     this.indexIds = {};
   }
@@ -33,10 +34,10 @@ export class MdComposer {
    */
   public parse() {
     const tree = marked.lexer(this.content);
-    const delta = new Delta().retain(this.ds.archivedIndex);
+    const delta = new Delta().retain(this.dc.archivedIndex);
     // 这里的指针需要合并已经归档的长度
     // 因为 delta 首个值是 retain, 这里同样需要对齐其长度表达
-    let archiveLength = this.ds.archivedIndex;
+    let archiveLength = this.dc.archivedIndex;
     // 只迭代 root 的首层子节点
     for (let i = 0; i < tree.length; i++) {
       const prev = tree[i - 1];
@@ -45,25 +46,27 @@ export class MdComposer {
       // 此外诸如表格等节点可以正则匹配来避免过早归档
       if (prev && child) {
         this.archive(prev);
-        archiveLength = archiveLength + this.ds.archive();
-        const deltaLength = delta.length();
+        archiveLength = archiveLength + this.dc.archive();
+        const deltaLength = getDeltaPointerPosition(delta);
         // 若归档长度大于当前 delta 长度，则需要移动指针
         if (archiveLength - deltaLength > 0) {
-          delta.ops.push({ retain: archiveLength - deltaLength });
+          delta.push({ retain: archiveLength - deltaLength });
         }
       }
       const section = parseLexerToken(child);
-      const diff = this.ds.compose(section);
-      delta.ops.push(...diff.ops);
+      const diff = this.dc.compose(section);
+      diff.ops.forEach(op => delta.push(op));
     }
     return delta.chop();
   }
 
   /**
    * 归档部分内容
+   * @returns archived 字符长度
    */
   public archive(block: Token) {
     const len = block.raw.length;
     this.content = this.content.slice(len);
+    return len;
   }
 }

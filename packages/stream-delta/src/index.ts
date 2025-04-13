@@ -13,8 +13,8 @@ import { getReadableMarkdown } from "./utils/stream";
 let delta = new MutateDelta().insertEOL();
 const readable = getReadableMarkdown();
 const reader = readable.getReader();
-const ds = new DeltaComposer();
-const ms = new MdComposer(ds);
+const dc = new DeltaComposer();
+const ms = new MdComposer(dc);
 
 const reconcile = (text: string) => {
   console.log("SSE TEXT:", JSON.stringify(text));

@@ -48,12 +48,37 @@ describe("streaming", () => {
       { insert: "初始多行文本内容\n初始多\n" },
     ]);
     expect(diff2.ops).toEqual([
-      { retain: 5 },
-      { retain: 12 },
+      { retain: 17 },
       { insert: "行文本内容\n初始多行文本内容" },
       { retain: 1 },
       { insert: "二级标题" },
       { insert: "\n", attributes: { heading: "h2" } },
+    ]);
+  });
+
+  it("unexpected cutoff", () => {
+    const ds = new DeltaComposer();
+    const ms = new MdComposer(ds);
+    // let delta = new MutateDelta().insertEOL();
+    const res = [
+      ms.compose("## 二级标题\n**"),
+      ms.compose("加粗**\n\n### 三级"),
+      ms.compose("标题"),
+    ];
+    // res.forEach(diff => console.log(JSON.stringify(diff.ops)));
+    // res.forEach(diff => (delta = delta.compose(diff)));
+    // console.log("delta.ops :>> ", delta.ops);
+    expect(res.map(it => it.ops)).toEqual([
+      [{ insert: "二级标题" }, { attributes: { heading: "h2" }, insert: "\n" }, { insert: "**\n" }],
+      [
+        { retain: 5 },
+        { attributes: { bold: "true" }, insert: "加粗" },
+        { delete: 2 },
+        { retain: 1 },
+        { insert: "三级" },
+        { insert: "\n", attributes: { heading: "h3" } },
+      ],
+      [{ retain: 10 }, { insert: "标题" }],
     ]);
   });
 });
