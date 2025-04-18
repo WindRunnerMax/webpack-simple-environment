@@ -44,6 +44,7 @@ export const Stream: FC = () => {
     const text = data.replace(/\\n/g, "\n");
     const start = currentIndex.current;
     const len = text.length;
+    // 缓冲区 50 字以内一阶平滑, 50 字以上二阶平滑
     const delay = len - start > 50 ? 10 : 50;
     const process = () => {
       currentIndex.current++;

@@ -10,7 +10,7 @@ import { getReadableMarkdown } from "./utils/stream";
  * 2. 基于 Lexer 解析的结构, 双指针绑定 Delta 的增量变更
  */
 
-let delta = new MutateDelta().insertEOL();
+let draft = new MutateDelta().insertEOL();
 const readable = getReadableMarkdown();
 const reader = readable.getReader();
 const dc = new DeltaComposer();
@@ -19,16 +19,17 @@ const ms = new MdComposer(dc);
 const reconcile = (text: string) => {
   console.log("SSE TEXT:", JSON.stringify(text));
   const diff = ms.compose(text);
-  delta = delta.compose(diff);
+  draft = draft.compose(diff);
   // console.log(JSON.stringify(diff.ops));
+  // console.log(JSON.stringify(draft.ops));
 };
 
 const start = async () => {
   const { done, value } = await reader.read();
   if (done) {
     console.log("解析完成:");
-    console.log(delta.ops.map(op => op.insert));
-    console.log(JSON.stringify(delta.ops));
+    console.log(draft.ops.map(op => op.insert));
+    console.log(JSON.stringify(draft.ops));
     return;
   }
   reconcile(value.replace(/\\n/g, "\n"));

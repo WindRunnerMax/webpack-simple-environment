@@ -3,8 +3,8 @@ import { MdComposer } from "../src/modules/md-composer";
 
 describe("streaming", () => {
   it("heading whole", () => {
-    const ds = new DeltaComposer();
-    const ms = new MdComposer(ds);
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
     const diff1 = ms.compose("# 测试文档\n\n");
     const diff2 = ms.compose("初始多行");
     // console.log(JSON.stringify(diff1.ops));
@@ -17,8 +17,8 @@ describe("streaming", () => {
   });
 
   it("heading divide", () => {
-    const ds = new DeltaComposer();
-    const ms = new MdComposer(ds);
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
     const diff1 = ms.compose("# 测试文");
     const diff2 = ms.compose("档\n\n初始多行");
     // console.log(JSON.stringify(diff1.ops));
@@ -36,8 +36,8 @@ describe("streaming", () => {
   });
 
   it("missing \n", () => {
-    const ds = new DeltaComposer();
-    const ms = new MdComposer(ds);
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
     const diff1 = ms.compose("# 测试文档\n\n初始多行文本内容\n初始多");
     const diff2 = ms.compose("行文本内容\n初始多行文本内容\n\n## 二级标题\n");
     // console.log(JSON.stringify(diff1.ops));
@@ -57,8 +57,8 @@ describe("streaming", () => {
   });
 
   it("unexpected cutoff", () => {
-    const ds = new DeltaComposer();
-    const ms = new MdComposer(ds);
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
     // let delta = new MutateDelta().insertEOL();
     const res = [
       ms.compose("## 二级标题\n**"),

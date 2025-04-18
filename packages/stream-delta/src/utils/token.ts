@@ -70,7 +70,9 @@ export const parseLexerToken = (
       return delta;
     }
     case "list_item": {
-      if (!parent || parent.type !== "list") return new Delta();
+      if (!parent || parent.type !== "list") {
+        return new Delta();
+      }
       const tokens = token.tokens || [];
       const listLevel = options.listLevel || 1;
       const start = parent.start || 1;
@@ -85,7 +87,9 @@ export const parseLexerToken = (
         tokenDelta && delta.ops.push(...tokenDelta.ops);
         // 普通的块节点不会存在块级的 Token, 但是 list_item 可能存在 list 节点
         // 因此必须要特判文本节点来处理行格式, 内部的 list 节点则继续递归处理
-        if (!tokenDelta || child.type !== "text") return void 0;
+        if (!tokenDelta || child.type !== "text") {
+          return void 0;
+        }
         const level = String(listLevel);
         if (parent.ordered === true) {
           const startIndex = String(index + start);
