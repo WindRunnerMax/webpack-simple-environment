@@ -4,6 +4,7 @@ import type { Token } from "marked";
 import { marked } from "marked";
 
 import { getDeltaPointerPosition } from "../utils/delta";
+import { normalizeTokenList as normalizeTokenTree } from "../utils/normalize";
 import { parseLexerToken } from "../utils/token";
 import type { DeltaComposer } from "./delta-composer";
 
@@ -14,11 +15,17 @@ export class MdComposer {
   /** 正在解析的内容 */
   protected content: string;
   /** 索引幂等的记录 */
-  public indexIds: O.Map<string[]>;
+  public indexIds: O.Map<O.Map<string>>;
+  /** 归档的主级节点索引值 */
+  public archiveLexerIndex: number;
 
+  /**
+   * 构造函数
+   */
   public constructor(protected dc: DeltaComposer) {
     this.content = "";
     this.indexIds = {};
+    this.archiveLexerIndex = 0;
   }
 
   /**
@@ -33,11 +40,12 @@ export class MdComposer {
    * 解析当前内容
    */
   public parse() {
-    const tree = marked.lexer(this.content);
-    const delta = new Delta().retain(this.dc.archivedIndex);
+    const tree = normalizeTokenTree(marked.lexer(this.content));
+    const delta = new Delta().retain(this.dc.archiveIndex);
     // 这里的指针需要合并已经归档的长度
     // 因为 delta 首个值是 retain, 这里同样需要对齐其长度表达
-    let archiveLength = this.dc.archivedIndex;
+    let archiveLength = this.dc.archiveIndex;
+    const archiveLexerIndex = this.archiveLexerIndex;
     // 只迭代 root 的首层子节点
     for (let i = 0; i < tree.length; i++) {
       const prev = tree[i - 1];
@@ -53,7 +61,12 @@ export class MdComposer {
           delta.push({ retain: archiveLength - deltaLength });
         }
       }
-      const section = parseLexerToken(child);
+      const section = parseLexerToken(child, {
+        depth: 0,
+        mc: this,
+        parent: null,
+        index: archiveLexerIndex + i,
+      });
       const diff = this.dc.compose(section);
       diff.ops.forEach(op => delta.push(op));
     }
@@ -65,8 +78,18 @@ export class MdComposer {
    * @returns archived 字符长度
    */
   public archive(block: Token) {
+    this.archiveLexerIndex++;
     const len = block.raw.length;
     this.content = this.content.slice(len);
     return len;
+  }
+
+  /**
+   * 重置当前解析器
+   */
+  public reset() {
+    this.content = "";
+    this.indexIds = {};
+    this.archiveLexerIndex = 0;
   }
 }

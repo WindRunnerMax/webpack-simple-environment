@@ -1,4 +1,4 @@
-import { Delta } from "@block-kit/delta";
+import { Delta, MutateDelta } from "@block-kit/delta";
 import { marked } from "marked";
 
 import { parseLexerToken } from "../src/utils/token";
@@ -7,7 +7,11 @@ describe("token", () => {
   it("bold delta", () => {
     const tokens = marked.lexer("123**text**456");
     const delta = parseLexerToken(tokens[0]);
-    const expected = new Delta().insert("123").insert("text", { bold: "true" }).insert("456\n");
+    const expected = new MutateDelta()
+      .insert("123")
+      .insert("text", { bold: "true" })
+      .insert("456")
+      .insertEOL();
     expect(delta).toEqual(expected);
   });
 

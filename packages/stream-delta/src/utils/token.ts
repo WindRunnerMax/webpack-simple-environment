@@ -1,17 +1,9 @@
-import type { AttributeMap } from "@block-kit/delta";
 import { Delta } from "@block-kit/delta";
 import type { MarkedToken, Token } from "marked";
 
 import type { TokenParserOptions } from "../types";
 import { DEFAULT_OPTIONS } from "../types";
-
-const applyMarks = (delta: Delta, attrs: AttributeMap) => {
-  delta.ops = delta.ops.map(op => {
-    const nextAttrs: AttributeMap = { ...op.attributes, ...attrs };
-    return { ...op, attributes: nextAttrs };
-  });
-  return delta;
-};
+import { applyLineMarks, applyMarks } from "./delta";
 
 const coordinate = (tokens: Token[], options: Omit<TokenParserOptions, "index">) => {
   const delta = new Delta();
@@ -36,33 +28,40 @@ export const parseLexerToken = (
     case "paragraph": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
-      delta.insertEOL();
+      applyLineMarks(delta, {});
       return delta;
     }
     case "heading": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
-      delta.insertEOL({ heading: "h" + token.depth });
+      // 在列表格式解析的时候, 会存在意外的 heading 格式, 此时作为普通文本处理
+      if (!parent || (parent.type !== "list_item" && parent.raw.startsWith("#"))) {
+        applyLineMarks(delta, { heading: "h" + token.depth });
+      }
       return delta;
     }
     case "blockquote": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
-      delta.insertEOL({ quote: "true" });
+      applyLineMarks(delta, { quote: "true" });
       return delta;
     }
     case "list": {
       const tokens = token.items || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
         listLevel: options.listLevel || 0,
@@ -79,6 +78,7 @@ export const parseLexerToken = (
       const delta = new Delta();
       tokens.forEach((child, i) => {
         const tokenDelta = parseLexerToken(child, {
+          ...options,
           depth: depth + 1,
           index: i,
           parent: token,
@@ -87,20 +87,20 @@ export const parseLexerToken = (
         tokenDelta && delta.ops.push(...tokenDelta.ops);
         // 普通的块节点不会存在块级的 Token, 但是 list_item 可能存在 list 节点
         // 因此必须要特判文本节点来处理行格式, 内部的 list 节点则继续递归处理
-        if (!tokenDelta || child.type !== "text") {
+        if (!tokenDelta || child.type === "list") {
           return void 0;
         }
         const level = String(listLevel);
         if (parent.ordered === true) {
           const startIndex = String(index + start);
-          delta.insertEOL({ ordered: "true", level, index: startIndex });
+          applyLineMarks(delta, { ordered: "true", level, index: startIndex });
         }
         if (parent.ordered === false) {
-          delta.insertEOL({ bullet: "true", level });
+          applyLineMarks(delta, { bullet: "true", level });
         }
         if (token.task === true) {
           const checked = String(!!token.checked);
-          delta.insertEOL({ checkbox: "true", checked, level });
+          applyLineMarks(delta, { checkbox: "true", checked, level });
         }
       });
       return delta;
@@ -109,6 +109,7 @@ export const parseLexerToken = (
     case "strong": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth,
         parent: token,
       });
@@ -118,6 +119,7 @@ export const parseLexerToken = (
     case "em": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
@@ -127,6 +129,7 @@ export const parseLexerToken = (
     case "del": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
@@ -136,6 +139,7 @@ export const parseLexerToken = (
     case "link": {
       const tokens = token.tokens || [];
       const delta = coordinate(tokens, {
+        ...options,
         depth: depth + 1,
         parent: token,
       });
@@ -147,6 +151,15 @@ export const parseLexerToken = (
       return delta;
     }
     case "text": {
+      if (token.tokens) {
+        const tokens = token.tokens || [];
+        const delta = coordinate(tokens, {
+          ...options,
+          depth: depth + 1,
+          parent: token,
+        });
+        return delta;
+      }
       const delta = new Delta().insert(token.text);
       return delta;
     }

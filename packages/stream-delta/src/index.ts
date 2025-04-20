@@ -1,8 +1,8 @@
 import { MutateDelta } from "@block-kit/delta";
 
+import { getReadableMarkdown } from "./config/stream";
 import { DeltaComposer } from "./modules/delta-composer";
 import { MdComposer } from "./modules/md-composer";
-import { getReadableMarkdown } from "./utils/stream";
 
 /**
  * 整体大原则:

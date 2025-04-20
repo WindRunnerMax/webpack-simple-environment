@@ -81,4 +81,40 @@ describe("streaming", () => {
       [{ retain: 10 }, { insert: "标题" }],
     ]);
   });
+
+  it("list block", () => {
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
+    const res = [ms.compose("1. 1\n"), ms.compose("   "), ms.compose("-"), ms.compose(" a")];
+    // res.forEach(diff => console.log(JSON.stringify(diff.ops)));
+    expect(res.map(it => it.ops)).toEqual([
+      [{ insert: "1" }, { insert: "\n", attributes: { ordered: "true", level: "1", index: "1" } }],
+      [],
+      [],
+      [
+        { retain: 2 },
+        { insert: "a" },
+        { attributes: { bullet: "true", level: "2" }, insert: "\n" },
+      ],
+    ]);
+  });
+
+  it("unexpected list heading", () => {
+    const dc = new DeltaComposer();
+    const ms = new MdComposer(dc);
+    const res = [ms.compose("1. 111\n"), ms.compose("   -"), ms.compose(" a")];
+    // res.forEach(diff => console.log(JSON.stringify(diff.ops)));
+    expect(res.map(it => it.ops)).toEqual([
+      [
+        { insert: "111" },
+        { insert: "\n", attributes: { ordered: "true", level: "1", index: "1" } },
+      ],
+      [],
+      [
+        { retain: 4 },
+        { insert: "a" },
+        { attributes: { bullet: "true", level: "2" }, insert: "\n" },
+      ],
+    ]);
+  });
 });

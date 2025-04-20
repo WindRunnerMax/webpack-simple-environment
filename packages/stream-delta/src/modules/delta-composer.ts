@@ -1,14 +1,17 @@
 import { cloneOps, Delta } from "@block-kit/delta";
 
 export class DeltaComposer {
-  /** 归档的索引 */
-  public archivedIndex: number;
   /** 正在处理的 delta */
   public current: Delta | null;
+  /** 归档的索引 */
+  public archiveIndex: number;
 
+  /**
+   * 构造函数
+   */
   public constructor() {
-    this.archivedIndex = 0;
-    this.current = new Delta();
+    this.current = null;
+    this.archiveIndex = 0;
   }
 
   /**
@@ -36,10 +39,18 @@ export class DeltaComposer {
     if (this.current) {
       // 此处理论上只有 insert, 因此无需考虑 delete 的指针问题
       const len = this.current.length();
-      this.archivedIndex = this.archivedIndex + len;
+      this.archiveIndex = this.archiveIndex + len;
       this.current = null;
       return len;
     }
     return 0;
+  }
+
+  /**
+   * 重置当前解析器
+   */
+  public reset() {
+    this.current = null;
+    this.archiveIndex = 0;
   }
 }
