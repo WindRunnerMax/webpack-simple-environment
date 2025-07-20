@@ -158,5 +158,11 @@
 <td><a href="./packages/stream-delta">packages/stream-delta</a></td>
 </tr>
 
+<tr>
+<td><a href="https://github.com/WindRunnerMax/EveryDay">基于向量检索实现基础RAG服务</a></td>
+<td><a href="./packages/hnsw-rag">packages/hnsw-rag</a></td>
+</tr>
+
+
 </tbody>
 </table>
