@@ -5,6 +5,7 @@ import http from "node:http";
 // 对于内部正在执行的其他任务, 例如离线任务等需要重置等待调度
 
 const server = http.createServer((_, res) => {
+  console.log("Received Request", Date.now());
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("Hello, World!\n");
 });
