@@ -159,7 +159,7 @@
 </tr>
 
 <tr>
-<td>基于向量检索实现基础RAG服务</td>
+<td><a href="https://github.com/WindRunnerMax/EveryDay/blob/master/Plugin/基于向量检索实现基础RAG服务.md">基于向量检索实现基础RAG服务</a></td>
 <td><a href="./packages/hnsw-rag">packages/hnsw-rag</a></td>
 </tr>
 
