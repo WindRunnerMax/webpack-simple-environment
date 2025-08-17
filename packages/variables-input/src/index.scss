@@ -1,0 +1,58 @@
+.vars-input-container-wrapper {
+  padding: 0 20px;
+  padding-top: 200px;
+
+  .vars-input-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    text-align: center;
+    user-select: none;
+  }
+}
+
+.vars-input-container {
+  border: 1px solid rgba(var(--gray-7), 0.26);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 750px;
+  min-height: 100px;
+  padding: 13px 15px;
+}
+
+.vars-input-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+
+  .vars-input-send {
+    align-items: center;
+    background-color: rgb(var(--arcoblue-6));
+    border-radius: 50%;
+    color: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    height: 30px;
+    justify-content: center;
+    transition: all 0.1s ease-in-out;
+    width: 30px;
+
+    &:hover {
+      background-color: rgb(var(--arcoblue-7));
+    }
+  }
+}
+
+.github-link {
+  color: var(--color-text-1);
+  font-size: 23px;
+  position: fixed;
+  right: 12px;
+  top: 6px;
+}

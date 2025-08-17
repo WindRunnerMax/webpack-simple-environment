@@ -1,0 +1,39 @@
+{
+  "name": "variables-input",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "rspack serve --config ./rspack.config.ts",
+    "build": "rspack build --config ./rspack.config.ts",
+    "analyze": "rspack build --config ./rspack.config.ts --analyze"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@arco-design/web-react": "2.60.3",
+    "@block-kit/variable": "1.0.12",
+    "@block-kit/utils": "1.0.11",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@rspack/cli": "0.2.5",
+    "@rspack/plugin-html": "0.2.5",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "copy-webpack-plugin": "5",
+    "less": "4.2.0",
+    "less-loader": "12.1.0",
+    "sass-loader": "13.3.3"
+  }
+}

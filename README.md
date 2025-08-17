@@ -168,5 +168,10 @@
 <td><a href="./packages/graceful-shutdown">packages/graceful-shutdown</a></td>
 </tr>
 
+<tr>
+<td>基于可编辑变量实现模版输入框</td>
+<td><a href="./packages/variables-input">packages/variables-input</a></td>
+</tr>
+
 </tbody>
 </table>
