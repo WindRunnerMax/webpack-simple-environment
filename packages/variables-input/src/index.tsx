@@ -3,11 +3,17 @@ import "@arco-design/web-react/es/style/index.less";
 import "@block-kit/variable/dist/style/index.css";
 
 import { IconArrowUp, IconGithub } from "@arco-design/web-react/icon";
-import { cs, preventNativeEvent } from "@block-kit/utils";
-import { Editor, LOG_LEVEL, SelectorInputPlugin } from "@block-kit/variable";
-import { Delta } from "@block-kit/variable";
-import { BlockKit, Editable } from "@block-kit/variable";
-import { EditableInputPlugin } from "@block-kit/variable";
+import {
+  BlockKit,
+  cs,
+  Delta,
+  Editable,
+  EditableInputPlugin,
+  Editor,
+  LOG_LEVEL,
+  preventNativeEvent,
+  SelectorInputPlugin,
+} from "@block-kit/variable";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
