@@ -169,7 +169,7 @@
 </tr>
 
 <tr>
-<td>仿照豆包实现 Prompt 变量模板输入框</td>
+<td><a href="https://github.com/WindRunnerMax/EveryDay/blob/master/Plugin/仿照豆包实现Prompt变量模板输入框.md">仿照豆包实现 Prompt 变量模板输入框</a></td>
 <td><a href="./packages/variables-input">packages/variables-input</a></td>
 </tr>
 
