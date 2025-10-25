@@ -1,0 +1,20 @@
+{
+  "name": "tasks-queue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nest start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nestjs/common": "11.0.1",
+    "@nestjs/core": "11.0.1",
+    "@nestjs/platform-express": "11.0.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0"
+  }
+}

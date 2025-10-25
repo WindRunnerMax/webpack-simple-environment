@@ -17,7 +17,7 @@ npx tsc --project tsconfig.json
 
 export PATH="$PWD/node_modules/.bin:$PATH"
 # exec pm2-runtime start pm2.config.js --env production
-exec pm2 start ./dist/index.js -i 2 --kill-timeout 5000 --log-date-format="YYYY-MM-DD HH:mm:ss"
+exec pm2 start ./dist/index.js -i 2 --kill-timeout 5000 --log-date-format="YYYY-MM-DD HH:mm:ss" --log ./output.log
 
 # pm2 start xxxxxxx
 # forward_signal() {
