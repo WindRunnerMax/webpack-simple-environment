@@ -166,6 +166,7 @@
 <tr>
 <td>基于 NodeJs 实现任务队列与优雅停机</td>
 <td><a href="./packages/graceful-shutdown">packages/graceful-shutdown</a></td>
+<td><a href="./packages/task-queue-schedule">packages/task-queue-schedule</a></td>
 </tr>
 
 <tr>
