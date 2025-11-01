@@ -1,3 +1,5 @@
+import { Bind } from "@block-kit/utils";
+
 const MEMORY_MAP: Record<string, number> = {};
 
 export class TaskQueue {
@@ -7,19 +9,22 @@ export class TaskQueue {
   private readonly maxTasks: number;
   /** 本机正在运行任务数量 */
   private runningTasks: number;
-  /** 调度运行任务 */
-  private onRunning: () => Promise<void>;
 
-  public constructor(options: { key: string; maxTasks: number; onRunning: () => Promise<void> }) {
+  public constructor(
+    /** 唯一标识 */
+    key: string,
+    /** 最大并行任务数 */
+    maxTasks: number
+  ) {
+    this.key = key;
     this.runningTasks = 0;
-    this.key = options.key;
-    this.maxTasks = options.maxTasks;
-    this.onRunning = options.onRunning;
+    this.maxTasks = maxTasks;
   }
 
   /**
    * 尝试批量调度任务
    */
+  @Bind
   public async tryRun() {
     const batch = this.maxTasks - this.runningTasks;
     for (let i = 0; i < batch; i++) {
@@ -30,24 +35,35 @@ export class TaskQueue {
   /**
    * 正式调度任务
    */
+  @Bind
   public async run() {
     const assigned = await this.assign();
     if (!assigned) return void 0;
+    let id: string | undefined = void 0;
     this.runningTasks++;
     try {
-      // findAndModify + taskProcessing + updateTaskStatus
-      await this.onRunning();
+      id = await this.onRunning();
     } catch (error) {
       console.error("Task Queue Running Error:", error);
     }
     this.runningTasks--;
     await this.release();
-    process.nextTick(this.tryRun);
+    id && process.nextTick(this.tryRun);
+  }
+
+  /**
+   * 调度运行任务
+   * - 需要实例化后重写该方法
+   * @returns 返回任务标识 id
+   */
+  public async onRunning(): Promise<string | undefined> {
+    return void 0;
   }
 
   /**
    * 分配 Quota
    */
+  @Bind
   public async assign(): Promise<boolean> {
     const lockKey = "_lock_" + this.key;
     let current = MEMORY_MAP[lockKey];
@@ -55,17 +71,18 @@ export class TaskQueue {
       current = MEMORY_MAP[lockKey] = 0;
     }
     if (current >= this.maxTasks) {
-      console.log("Lock Limit", lockKey, "=>", this.maxTasks);
+      // console.log("Lock Limit", lockKey, "->", this.maxTasks);
       return false;
     }
     const serial = ++MEMORY_MAP[lockKey];
-    console.log("Lock Assign", lockKey, "=>", serial);
+    console.log("Lock Assign", lockKey, "->", serial);
     return true;
   }
 
   /**
    * 释放 Quota
    */
+  @Bind
   public async release(): Promise<boolean> {
     const lockKey = "_lock_" + this.key;
     const current = MEMORY_MAP[lockKey];
@@ -75,11 +92,11 @@ export class TaskQueue {
     }
     if (current <= 0) {
       MEMORY_MAP[lockKey] = 0;
-      console.log("Lock Zero", lockKey, "=>", current);
+      console.log("Lock Zero", lockKey, "->", current);
       return true;
     }
-    const serial = --MEMORY_MAP[lockKey];
-    console.log("Lock Release", lockKey, "=>", serial);
+    console.log("Lock Release", lockKey, "->", MEMORY_MAP[lockKey]);
+    --MEMORY_MAP[lockKey];
     return true;
   }
 }
