@@ -27,5 +27,6 @@ export class IndexController {
     for (let i = 0; i < 5; i++) {
       this.tasksService.createTask();
     }
+    this.tasksService.queue.tryRun();
   }
 }

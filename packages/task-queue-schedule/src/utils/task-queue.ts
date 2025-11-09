@@ -25,7 +25,7 @@ export class TaskQueue {
    * 尝试批量调度任务
    */
   @Bind
-  public async tryRun() {
+  public async tryRun(): Promise<void> {
     const batch = this.maxTasks - this.runningTasks;
     for (let i = 0; i < batch; i++) {
       this.run();
@@ -36,7 +36,7 @@ export class TaskQueue {
    * 正式调度任务
    */
   @Bind
-  public async run() {
+  public async run(): Promise<void> {
     const assigned = await this.assign();
     if (!assigned) return void 0;
     let id: string | undefined = void 0;
@@ -75,7 +75,7 @@ export class TaskQueue {
       return false;
     }
     const serial = ++MEMORY_MAP[lockKey];
-    console.log("Lock Assign", lockKey, "->", serial);
+    console.log("Lock Assign", lockKey, serial - 1, "->", serial);
     return true;
   }
 
@@ -92,10 +92,11 @@ export class TaskQueue {
     }
     if (current <= 0) {
       MEMORY_MAP[lockKey] = 0;
-      console.log("Lock Zero", lockKey, "->", current);
+      // console.log("Lock Zero", lockKey, "->", current);
       return true;
     }
-    console.log("Lock Release", lockKey, "->", MEMORY_MAP[lockKey]);
+    const serial = MEMORY_MAP[lockKey];
+    console.log("Lock Release", lockKey, serial, "->", serial - 1);
     --MEMORY_MAP[lockKey];
     return true;
   }

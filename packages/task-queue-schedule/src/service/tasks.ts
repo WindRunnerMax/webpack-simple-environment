@@ -1,9 +1,9 @@
 import { Bind, sleep } from "@block-kit/utils";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Scope } from "@nestjs/common";
 
 import { TaskQueue } from "../utils/task-queue";
 
-@Injectable()
+@Injectable({ scope: Scope.DEFAULT })
 export class TasksService {
   public queue: TaskQueue;
   public tasks: { id: string; status: "pending" | "running" | "success" | "fail" }[];
@@ -17,7 +17,6 @@ export class TasksService {
   public async createTask() {
     const id = `task_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
     this.tasks.push({ id, status: "pending" });
-    this.queue.tryRun();
     return { id };
   }
 
