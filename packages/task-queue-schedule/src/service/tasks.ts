@@ -1,6 +1,7 @@
 import { Bind, sleep } from "@block-kit/utils";
 import { Injectable, Scope } from "@nestjs/common";
 
+import type { QueueContext } from "../types/queue";
 import { TaskQueue } from "../utils/task-queue";
 
 @Injectable({ scope: Scope.DEFAULT })
@@ -21,13 +22,18 @@ export class TasksService {
   }
 
   @Bind
-  private async onRunning() {
+  private async onRunning(context: QueueContext) {
     const task = await this.findAndModify({ status: "pending" }, "running");
     if (!task) return void 0;
+    // 存在任务的情况下, 尝试触发下一个并行任务
+    context.tryNextTask();
     const now = Date.now();
+    let taskIsFinished = false;
     const execute = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, Math.random() * 3000));
+        if (taskIsFinished) return void 0;
+        taskIsFinished = true;
         await this.findAndModify({ id: task.id, status: "running" }, "success");
         console.log(`Task ${task.id} cost ${Date.now() - now} ms.`);
       } catch (error) {
@@ -37,10 +43,12 @@ export class TasksService {
     };
     const timeout = async (ms: number) => {
       await sleep(ms);
+      if (taskIsFinished) return void 0;
+      taskIsFinished = true;
       await this.findAndModify({ id: task.id, status: "running" }, "fail");
     };
-    await Promise.all([execute(), timeout(2000)]);
-    return task.id;
+    await Promise.race([execute(), timeout(2000)]);
+    return true;
   }
 
   private async findAndModify(

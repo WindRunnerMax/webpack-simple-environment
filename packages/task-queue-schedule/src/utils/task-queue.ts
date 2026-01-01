@@ -1,32 +1,34 @@
 import { Bind } from "@block-kit/utils";
 
+import type { QueueContext } from "../types/queue";
+
 const MEMORY_MAP: Record<string, number> = {};
 
 export class TaskQueue {
   /** 实例/锁标识 */
   private readonly key: string;
-  /** 并发运行数 */
-  private readonly maxTasks: number;
+  /** 最大并发运行数 */
+  private readonly max: number;
   /** 本机正在运行任务数量 */
-  private runningTasks: number;
+  private running: number;
 
   public constructor(
     /** 唯一标识 */
     key: string,
     /** 最大并行任务数 */
-    maxTasks: number
+    max: number
   ) {
     this.key = key;
-    this.runningTasks = 0;
-    this.maxTasks = maxTasks;
+    this.max = max;
+    this.running = 0;
   }
 
   /**
    * 尝试批量调度任务
    */
   @Bind
-  public async tryRun(): Promise<void> {
-    const batch = this.maxTasks - this.runningTasks;
+  public async tryBatchRun(): Promise<void> {
+    const batch = this.max - this.running;
     for (let i = 0; i < batch; i++) {
       this.run();
     }
@@ -37,26 +39,32 @@ export class TaskQueue {
    */
   @Bind
   public async run(): Promise<void> {
+    if (this.running >= this.max) return void 0;
     const assigned = await this.assign();
     if (!assigned) return void 0;
-    let id: string | undefined = void 0;
-    this.runningTasks++;
+    const index = ++this.running;
+    const context: QueueContext = {
+      index: index,
+      tryNextTask: this.run,
+    };
+    let grantNextTask: boolean | undefined = false;
     try {
-      id = await this.onRunning();
+      grantNextTask = await this.onRunning(context);
     } catch (error) {
       console.error("Task Queue Running Error:", error);
     }
-    this.runningTasks--;
+    this.running--;
     await this.release();
-    id && process.nextTick(this.tryRun);
+    grantNextTask && process.nextTick(this.run);
   }
 
   /**
    * 调度运行任务
    * - 需要实例化后重写该方法
-   * @returns 返回任务标识 id
+   * @returns 返回 true 则触发下一个任务执行
    */
-  public async onRunning(): Promise<string | undefined> {
+  public async onRunning(context: QueueContext): Promise<boolean | undefined>;
+  public async onRunning(): Promise<boolean | undefined> {
     return void 0;
   }
 
@@ -70,7 +78,7 @@ export class TaskQueue {
     if (current === void 0) {
       current = MEMORY_MAP[lockKey] = 0;
     }
-    if (current >= this.maxTasks) {
+    if (current >= this.max) {
       // console.log("Lock Limit", lockKey, "->", this.maxTasks);
       return false;
     }
