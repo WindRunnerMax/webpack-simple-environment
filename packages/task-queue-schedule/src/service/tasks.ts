@@ -1,18 +1,18 @@
 import { Bind, sleep } from "@block-kit/utils";
 import { Injectable, Scope } from "@nestjs/common";
 
-import type { QueueContext } from "../types/queue";
-import { TaskQueue } from "../utils/task-queue";
+import type { ParallelContext } from "../types/parallel";
+import { ParallelScheduler } from "../utils/parallel";
 
 @Injectable({ scope: Scope.DEFAULT })
 export class TasksService {
-  public queue: TaskQueue;
+  public scheduler: ParallelScheduler;
   public tasks: { id: string; status: "pending" | "running" | "success" | "fail" }[];
 
   public constructor() {
     this.tasks = [];
-    this.queue = new TaskQueue("key", 2);
-    this.queue.onRunning = this.onRunning;
+    this.scheduler = new ParallelScheduler("key", 2);
+    this.scheduler.onRunning = this.onRunning;
   }
 
   public async createTask() {
@@ -22,7 +22,7 @@ export class TasksService {
   }
 
   @Bind
-  private async onRunning(context: QueueContext) {
+  private async onRunning(context: ParallelContext) {
     const task = await this.findAndModify({ status: "pending" }, "running");
     if (!task) return void 0;
     // 存在任务的情况下, 尝试触发下一个并行任务

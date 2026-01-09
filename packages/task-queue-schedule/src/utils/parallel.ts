@@ -1,10 +1,10 @@
 import { Bind } from "@block-kit/utils";
 
-import type { QueueContext } from "../types/queue";
+import type { ParallelContext } from "../types/parallel";
 
 const MEMORY_MAP: Record<string, number> = {};
 
-export class TaskQueue {
+export class ParallelScheduler {
   /** 实例/锁标识 */
   private readonly key: string;
   /** 最大并发运行数 */
@@ -43,7 +43,7 @@ export class TaskQueue {
     const assigned = await this.assign();
     if (!assigned) return void 0;
     const index = ++this.running;
-    const context: QueueContext = {
+    const context: ParallelContext = {
       index: index,
       tryNextTask: this.run,
     };
@@ -63,7 +63,7 @@ export class TaskQueue {
    * - 需要实例化后重写该方法
    * @returns 返回 true 则触发下一个任务执行
    */
-  public async onRunning(context: QueueContext): Promise<boolean | undefined>;
+  public async onRunning(context: ParallelContext): Promise<boolean | undefined>;
   public async onRunning(): Promise<boolean | undefined> {
     return void 0;
   }

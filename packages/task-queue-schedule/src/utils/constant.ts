@@ -2,6 +2,7 @@
  * Redis 自增锁 LUA 脚本
  * - KEYS[1]: 锁的键名
  * - ARGV[1]: 最大任务数 MaxTask
+ * - RETURN: N > 0 分配后序列号, N < 0 分配失败
  * @example ioredis.eval(LUA_SCRIPT, 1, LOCK_KEY, MAX_TASK);
  */
 export const INCR_LOCK_LUA = `
@@ -24,6 +25,7 @@ export const INCR_LOCK_LUA = `
 /**
  * Redis 自减锁 LUA 脚本
  * - KEYS[1]: 锁的键名
+ * - RETURN: N > 0 释放后序列号, N = 0 任务全部结束
  * @example ioredis.eval(LUA_SCRIPT, 1, LOCK_KEY);
  */
 export const DESC_LOCK_LUA = `
